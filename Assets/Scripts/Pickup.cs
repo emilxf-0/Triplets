@@ -32,6 +32,7 @@ public class Pickup : MonoBehaviour
         hp -= damage;
         var healthPercent = hp/maxHp;
         
+        //TODO: Add a spritearray to cycle through as the pickup "takes damage"
         if (hp <= 0)
         {
             KillObject();
