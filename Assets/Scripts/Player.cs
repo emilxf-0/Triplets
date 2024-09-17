@@ -1,15 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Callbacks;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [Header("Player Stats")]
     [SerializeField] private float jumpForce = 10f;
+    [SerializeField] private float strength;
     public bool isGrounded = true;
     private Rigidbody2D rb = null;
     private Collider2D playerCollider = null;
-    // Start is called before the first frame update
+    
+    void OnEnable()
+    {
+        EventManager.OnPickUpDestroyed += OnPickUpDestroyed;
+    }
+
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -17,6 +24,15 @@ public class Player : MonoBehaviour
         
     }
 
+    void OnPickUpDestroyed()
+    {
+        Debug.Log("I won!");
+    }
+
+    void OnDisable()
+    {
+        EventManager.OnPickUpDestroyed -= OnPickUpDestroyed;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -40,6 +56,9 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        isGrounded = true;
+        if (collision.gameObject.CompareTag("ground"))
+        {
+            isGrounded = true;
+        }
     }
 }
