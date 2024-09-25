@@ -1,16 +1,36 @@
+using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+
 
 public class WaveManager : MonoBehaviour
 {
-    [SerializeField] private GameObject pickupPrefab;
+    [Serializable]
+    private class PrefabEntry
+    {
+        public string key;
+        public GameObject gameObject;
+    }
+
+    [SerializeField] private List<PrefabEntry> prefabEntries;
+    private Dictionary<string, GameObject> prefabDictionary = new();
     [SerializeField] private float spawnInterval;
-    [SerializeField] private Transform spawnPoint = null;
+    [SerializeField] private Transform pickupSpawnPoint = null;
+    [SerializeField] private Transform obstacleSpawnPoint = null;
+    [SerializeField] private float offsetInterval = 0;
     private float startTime = 0;
     private float currentTime = 0;
     private float offset = 0;
+
     void Start()
     {
-       startTime = Time.time; 
+        foreach (var prefab in prefabEntries)
+        {
+            prefabDictionary.Add(prefab.key, prefab.gameObject);
+        }
+        startTime = Time.time;
+
     }
 
     void Update()
@@ -18,9 +38,23 @@ public class WaveManager : MonoBehaviour
         currentTime = Time.time;
         if (currentTime - startTime > spawnInterval - offset)
         {
-            Instantiate(pickupPrefab, spawnPoint.transform.position, Quaternion.identity);
+            SpawnObject("Apple", pickupSpawnPoint);
+            SpawnObject("Obstacle", obstacleSpawnPoint);
             startTime = currentTime;
-            offset = Random.Range(-spawnInterval, spawnInterval);
+            offset = UnityEngine.Random.Range(-offsetInterval, offsetInterval);
+        }
+    }
+
+    void SpawnObject(string key, Transform spawnPoint)
+    {
+
+        if (prefabDictionary.TryGetValue(key, out GameObject prefab))
+        {
+            Instantiate(prefab, spawnPoint.transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Debug.LogWarning($"No prefab entry for {key} exists!");
         }
     }
 }

@@ -13,12 +13,18 @@ public class HUD : MonoBehaviour
     void OnEnable()
     {
         EventManager.OnPickUpDestroyed += OnPickUpDestroyed;
+        EventManager.OnAddScore += OnAddScore;
+    }
+
+    void OnAddScore(int score)
+    {
+        this.score += score;
+        scoreText.text = $"Score: {this.score:D6}";
     }
 
     void OnPickUpDestroyed()
     {
         score += 1;
-        scoreText.text = $"Score: {score:D6}";
     }
 
     void OnDisable()

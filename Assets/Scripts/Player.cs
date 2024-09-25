@@ -8,32 +8,37 @@ public class Player : MonoBehaviour
     [Header("Player Stats")]
     [SerializeField] private float jumpForce = 10f;
     [SerializeField] private float strength;
+    [SerializeField] private float fallSpeed = 0;
     public bool isGrounded = true;
     private Rigidbody2D rb = null;
     private Collider2D playerCollider = null;
-    
+    private bool isInvincible;
+
     void OnEnable()
     {
-        EventManager.OnPickUpDestroyed += OnPickUpDestroyed;
+        EventManager.OnSpawn += OnSpawn;
     }
-
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         playerCollider = gameObject.GetComponent<Collider2D>(); 
-        
-    }
-
-    void OnPickUpDestroyed()
-    {
-        Debug.Log("I won!");
     }
 
     void OnDisable()
     {
-        EventManager.OnPickUpDestroyed -= OnPickUpDestroyed;
+        EventManager.OnSpawn -= OnSpawn;
     }
-    // Update is called once per frame
+
+    void OnSpawn(GameObject gameObject)
+    {
+        if (gameObject != this.gameObject)
+        {
+            return;
+        }
+        playerCollider.enabled = false;
+        Invoke("ToggleInvincibility", 3f);
+    }    
+
     void Update()
     {
                         
@@ -46,12 +51,21 @@ public class Player : MonoBehaviour
 
             if (hit.collider == playerCollider && isGrounded)
             {
-                Debug.Log("I hit the object yo!");
                 rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
                 isGrounded = false;
             }
 
         }
+
+        if (!isGrounded)
+        {
+            rb.gravityScale += fallSpeed * Time.deltaTime;
+        }
+    }
+
+    private void ToggleInvincibility()
+    {
+        playerCollider.enabled = true;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -59,6 +73,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("ground"))
         {
             isGrounded = true;
+            rb.gravityScale = 1;
         }
     }
 }
