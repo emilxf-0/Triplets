@@ -9,11 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8777c8300c99cc84a991e8247414f109, type: 3}
-  m_Name: ExtraLife
+  m_Script: {fileID: 11500000, guid: ce7b69b1897b8d84fbf9e3ea0f63a623, type: 3}
+  m_Name: ExtraLifeEffect
   m_EditorClassIdentifier: 
-  pickupName: 
-  sprites:
-  - {fileID: 21300000, guid: a7c347b8a3c3eb6438adee5ba1da1857, type: 3}
-  effects:
-  - {fileID: 11400000, guid: 5766350fe552821409d49154d45fc77d, type: 2}

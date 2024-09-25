@@ -14,7 +14,7 @@ public class PlayerManager : MonoBehaviour
     private void OnEnable()
     {
         EventManager.OnTakeDamage += OnTakeDamage;
-        EventManager.OnPickUpDestroyed += OnPickUpDestroyed;
+        EventManager.OnAddLife += OnAddLife;
     }
     void Start()
     {   
@@ -28,13 +28,9 @@ public class PlayerManager : MonoBehaviour
     private void OnDisable()
     {
         EventManager.OnTakeDamage -= OnTakeDamage;
-        EventManager.OnPickUpDestroyed -= OnPickUpDestroyed;
+        EventManager.OnAddLife -= OnAddLife;
     }
 
-    void OnPickUpDestroyed()
-    {
-        AddLife();
-    }
 
     void OnTakeDamage(GameObject gameObject, int damage)
     {
@@ -48,7 +44,7 @@ public class PlayerManager : MonoBehaviour
         }
     }    
 
-    void AddLife()
+    void OnAddLife()
     {
         var offset = new Vector3(spacing * life, 0, 0);
         var newPlayerAvatar = Instantiate(playerPrefab, spawnPoint.transform.position - offset, Quaternion.identity); 

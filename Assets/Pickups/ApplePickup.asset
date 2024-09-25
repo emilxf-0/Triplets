@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: ApplePickup
   m_EditorClassIdentifier: 
   pickupName: 
-  sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  sprites:
+  - {fileID: 21300000, guid: 4f4dcd93c715d8f4a80fc7a79683a6d7, type: 3}
+  - {fileID: 21300000, guid: 2e7284ca6593d7a46a303720a84dc130, type: 3}
+  - {fileID: 21300000, guid: 9838be1e75d93a54bb014e022b7ea233, type: 3}
   effects:
   - {fileID: 11400000, guid: 8793d1afc697de043a3329e6ae484480, type: 2}

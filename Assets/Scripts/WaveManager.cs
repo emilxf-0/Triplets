@@ -38,7 +38,7 @@ public class WaveManager : MonoBehaviour
         currentTime = Time.time;
         if (currentTime - startTime > spawnInterval - offset)
         {
-            SpawnObject("Apple", pickupSpawnPoint);
+            SpawnObject("Extralife", pickupSpawnPoint);
             SpawnObject("Obstacle", obstacleSpawnPoint);
             startTime = currentTime;
             offset = UnityEngine.Random.Range(-offsetInterval, offsetInterval);
