@@ -508,14 +508,19 @@ MonoBehaviour:
   prefabEntries:
   - key: Apple
     gameObject: {fileID: 4346373297018332062, guid: 36c3531a90e38bd4498b323a1ebdd9a4, type: 3}
+    minSpawnInterval: 5
+    maxSpawnInterval: 10
+    spawnPoint: {fileID: 636747580}
   - key: Obstacle
     gameObject: {fileID: 3576559869350801430, guid: b102e5e77f54b1345ab3913de5e8c3cb, type: 3}
+    minSpawnInterval: 1
+    maxSpawnInterval: 20
+    spawnPoint: {fileID: 1926960862}
   - key: Extralife
     gameObject: {fileID: 25742518024120717, guid: 0a81c58b34b301f48a9d9f4be049daaf, type: 3}
-  spawnInterval: 5
-  pickupSpawnPoint: {fileID: 636747580}
-  obstacleSpawnPoint: {fileID: 1926960862}
-  offsetInterval: 1.5
+    minSpawnInterval: 60
+    maxSpawnInterval: 120
+    spawnPoint: {fileID: 636747580}
 --- !u!4 &817222295
 Transform:
   m_ObjectHideFlags: 0

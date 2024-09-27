@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Pickup : MonoBehaviour
@@ -10,6 +8,7 @@ public class Pickup : MonoBehaviour
     [SerializeField] PickupType pickupType;
     private SpriteRenderer spriteRenderer = null;
     private int spriteNumber = 0;
+    private Vector3 bounds;
     private void Start()
     {
         hp = maxHp;
@@ -18,13 +17,13 @@ public class Pickup : MonoBehaviour
             spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         }
 
+        bounds = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, Camera.main.nearClipPlane));
         spriteRenderer.sprite = pickupType.sprites[spriteNumber];
     }
 
     private void Update()
     {
         transform.position += new Vector3(-speed * Time.deltaTime, 0, 0);
-        var bounds = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, Camera.main.nearClipPlane));
         if (transform.position.x < bounds.x)
         {
             Destroy(gameObject);

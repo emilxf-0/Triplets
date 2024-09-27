@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
-
 
 public class WaveManager : MonoBehaviour
 {
@@ -11,43 +9,40 @@ public class WaveManager : MonoBehaviour
     {
         public string key;
         public GameObject gameObject;
+        public float minSpawnInterval;
+        public float maxSpawnInterval;
+        public Transform spawnPoint;
     }
 
     [SerializeField] private List<PrefabEntry> prefabEntries;
     private Dictionary<string, GameObject> prefabDictionary = new();
-    [SerializeField] private float spawnInterval;
-    [SerializeField] private Transform pickupSpawnPoint = null;
-    [SerializeField] private Transform obstacleSpawnPoint = null;
-    [SerializeField] private float offsetInterval = 0;
-    private float startTime = 0;
-    private float currentTime = 0;
-    private float offset = 0;
+    private Dictionary<string, float> nextSpawnTimes = new();
 
     void Start()
     {
         foreach (var prefab in prefabEntries)
         {
             prefabDictionary.Add(prefab.key, prefab.gameObject);
+            SetNextSpawnInterval(prefab.key, prefab.minSpawnInterval, prefab.maxSpawnInterval);
         }
-        startTime = Time.time;
-
     }
 
     void Update()
     {
-        currentTime = Time.time;
-        if (currentTime - startTime > spawnInterval - offset)
-        {
-            SpawnObject("Extralife", pickupSpawnPoint);
-            SpawnObject("Obstacle", obstacleSpawnPoint);
-            startTime = currentTime;
-            offset = UnityEngine.Random.Range(-offsetInterval, offsetInterval);
-        }
-    }
 
+        foreach (var prefab in prefabEntries)
+        {
+            if (Time.time >= nextSpawnTimes[prefab.key])
+            {
+                SpawnObject(prefab.key, prefab.spawnPoint); 
+                SetNextSpawnInterval(prefab.key, prefab.minSpawnInterval, prefab.maxSpawnInterval);
+            }
+        
+        }
+
+    }
     void SpawnObject(string key, Transform spawnPoint)
     {
-
         if (prefabDictionary.TryGetValue(key, out GameObject prefab))
         {
             Instantiate(prefab, spawnPoint.transform.position, Quaternion.identity);
@@ -56,5 +51,10 @@ public class WaveManager : MonoBehaviour
         {
             Debug.LogWarning($"No prefab entry for {key} exists!");
         }
+    }
+
+    void SetNextSpawnInterval(string key, float minSpawnInterval, float maxSpawnInterval)
+    {
+        nextSpawnTimes[key] = Time.time + UnityEngine.Random.Range(minSpawnInterval, maxSpawnInterval);
     }
 }

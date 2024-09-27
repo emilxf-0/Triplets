@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
-using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
 {
@@ -30,6 +26,7 @@ public class HUD : MonoBehaviour
     void OnDisable()
     {
         EventManager.OnPickUpDestroyed -= OnPickUpDestroyed;
+        EventManager.OnAddScore -= OnAddScore;
     }
     void Start()
     {

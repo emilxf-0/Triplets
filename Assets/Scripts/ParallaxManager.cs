@@ -15,6 +15,7 @@ public class ParallaxManager : MonoBehaviour
     float timer = 1;
     float startTime = 0;
     float currentTime = 0;
+    private float textureWidth;
     void Start()
     {
         startTime = Time.time;
@@ -27,23 +28,18 @@ public class ParallaxManager : MonoBehaviour
             parallaxRenderers[i].size *= new Vector2(3, 1);
             parallaxLayers[i].GetComponent<ParallaxLayer>().ParallaxSpeed = parallaxSpeed[i];
             parallaxRenderers[i].sortingOrder -= backgrounds.Count - i;
+            textureWidth = parallaxRenderers[i].sprite.texture.width / parallaxRenderers[i].sprite.pixelsPerUnit;
         }
     }
 
     void Update()
     {
-        currentTime = Time.time;
-        if (currentTime - startTime >= timer)
-        {
-            currentBackground++;
-            startTime = currentTime;
-        }
+       
 
         for (int i = 0; i < parallaxLayers.Count; i++)
         {
             var bounds = parallaxRenderers[i].bounds;
             var rightEdge = bounds.size.x;
-            var textureWidth = parallaxRenderers[i].sprite.texture.width / parallaxRenderers[i].sprite.pixelsPerUnit;
             parallaxLayers[i].transform.position += new Vector3(-parallaxSpeed[i] * Time.deltaTime, 0, 0);
 
             if ((Mathf.Abs(parallaxLayers[i].transform.position.x) - textureWidth) > 0)
