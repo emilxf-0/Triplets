@@ -11,14 +11,9 @@ public class ParallaxManager : MonoBehaviour
     private List<GameObject> parallaxLayers = new();
     private List<SpriteRenderer> parallaxRenderers = new();
     private float screenWidthInWorld;
-    private int currentBackground = 0;
-    float timer = 1;
-    float startTime = 0;
-    float currentTime = 0;
     private float textureWidth;
     void Start()
     {
-        startTime = Time.time;
 
         for (int i = 0; i < backgrounds.Count; i++)
         {

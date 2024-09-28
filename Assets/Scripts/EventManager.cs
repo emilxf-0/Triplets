@@ -1,4 +1,6 @@
 using System;
+using UnityEditor;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +12,8 @@ public static class EventManager
     public static event Action OnAddLife;
     public static event Action<GameObject, int> OnTakeDamage;
     public static event Action<Scene> OnSceneChange;
+    public static event Action OnRestartGame;
+    public static event Action OnGameOver;
     public static void PickupDestroyed()
     {
         OnPickUpDestroyed?.Invoke();   
@@ -26,6 +30,16 @@ public static class EventManager
     public static void AddScore(int score)
     {
         OnAddScore?.Invoke(score);
+    }
+
+    public static void RestartGame()
+    {
+        OnRestartGame?.Invoke();
+    }
+
+    public static void GameOver()
+    {
+        OnGameOver?.Invoke();
     }
 
     public static void TakeDamage(GameObject gameObject, int damage)

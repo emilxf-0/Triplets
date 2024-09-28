@@ -40,7 +40,7 @@ public class PlayerManager : MonoBehaviour
 
         if (life <= 0)
         {
-            SceneManager.LoadScene("Start");
+            EventManager.GameOver();
         }
     }    
 

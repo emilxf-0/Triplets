@@ -11,21 +11,38 @@ public class Player : MonoBehaviour
     private Collider2D playerCollider = null;
     private bool isInvincible;
     private Camera cam = null;
+    private Animator animator;
 
     void OnEnable()
     {
+        EventManager.OnTakeDamage += OnTakeDamage;
     }
+    
+    void OnDisable()
+    {
+        EventManager.OnTakeDamage -= OnTakeDamage;
+    }
+    
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         playerCollider = gameObject.GetComponent<Collider2D>(); 
         cam = Camera.main;
+        animator = gameObject.GetComponent<Animator>();
     }
 
-    void OnDisable()
+    void OnTakeDamage(GameObject gameObject, int damage)
     {
+        if (gameObject == this.gameObject)
+        {
+            animator.SetBool("isHurt", true);
+        } 
     }
 
+    public void EndHurtAnimation()
+    {
+        animator.SetBool("isHurt", false);
+    }
 
     void Update()
     {
@@ -40,6 +57,7 @@ public class Player : MonoBehaviour
             {
                 rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
                 isGrounded = false;
+                animator.SetBool("isJumping", true);
             }
 
         }
@@ -55,6 +73,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("ground"))
         {
             isGrounded = true;
+            animator.SetBool("isJumping", false);
             rb.gravityScale = 1;
         }
     }

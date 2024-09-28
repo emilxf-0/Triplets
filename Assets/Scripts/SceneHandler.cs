@@ -8,9 +8,14 @@ public class SceneHandler : MonoBehaviour
 {
     void OnEnable()
     {
-        
+
     }
     public void StartGame()
+    {
+        SceneManager.LoadScene("Game");
+    }
+
+    public void RestartGame()
     {
         SceneManager.LoadScene("Game");
     }
