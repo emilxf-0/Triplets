@@ -12,6 +12,8 @@ public static class EventManager
     public static event Action<Scene> OnSceneChange;
     public static event Action OnRestartGame;
     public static event Action OnGameOver;
+    public static event Action OnUpdateHiScore;
+    public static event Action<int> OnSetHiScore;
     public static void PickupDestroyed()
     {
         OnPickUpDestroyed?.Invoke();   
@@ -48,5 +50,10 @@ public static class EventManager
     public static void SceneChange(Scene scene)
     {
         OnSceneChange?.Invoke(scene);
+    }
+
+    public static void SetHiScore(int hiScore)
+    {
+        OnSetHiScore?.Invoke(hiScore);
     }
 }
