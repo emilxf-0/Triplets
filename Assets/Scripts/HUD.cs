@@ -1,11 +1,11 @@
 using TMPro;
 using UnityEngine;
+using System.IO;
 
 public class HUD : MonoBehaviour
 {
     [SerializeField] private TMP_Text scoreText = null;
     private int score = 0;
-
     void OnEnable()
     {
         EventManager.OnPickUpDestroyed += OnPickUpDestroyed;
@@ -31,6 +31,7 @@ public class HUD : MonoBehaviour
     void Start()
     {
         scoreText.text = $"Score: {score:D6}";
+
     }
 
     void Update()

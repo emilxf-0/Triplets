@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5627130582563607676
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5987869122840482084}
+  - component: {fileID: 1018235556418722139}
+  m_Layer: 0
+  m_Name: WaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5987869122840482084
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5627130582563607676}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.2746463, y: 6.5494366, z: -0.3714588}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1018235556418722139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5627130582563607676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaf2fc95d07bcbe4fbaa3a3834b088b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabEntries:
+  - key: Apple
+    gameObject: {fileID: 4346373297018332062, guid: 36c3531a90e38bd4498b323a1ebdd9a4, type: 3}
+    minSpawnInterval: 5
+    maxSpawnInterval: 10
+    spawnPoint: {fileID: 0}
+  - key: Obstacle
+    gameObject: {fileID: 3576559869350801430, guid: b102e5e77f54b1345ab3913de5e8c3cb, type: 3}
+    minSpawnInterval: 1
+    maxSpawnInterval: 20
+    spawnPoint: {fileID: 0}
+  - key: Extralife
+    gameObject: {fileID: 25742518024120717, guid: 0a81c58b34b301f48a9d9f4be049daaf, type: 3}
+    minSpawnInterval: 60
+    maxSpawnInterval: 120
+    spawnPoint: {fileID: 0}
