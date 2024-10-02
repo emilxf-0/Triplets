@@ -8,6 +8,7 @@ public class Obstacle : MonoBehaviour
     [SerializeField] private float speed = 0;
     private SpriteRenderer spriteRenderer = null;
     private Vector3 bounds;
+    
     private void Start()
     {
         if (spriteRenderer == null)

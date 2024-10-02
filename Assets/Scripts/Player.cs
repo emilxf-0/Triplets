@@ -9,7 +9,6 @@ public class Player : MonoBehaviour
     public bool isGrounded = true;
     private Rigidbody2D rb = null;
     private Collider2D playerCollider = null;
-    private bool isInvincible;
     private Camera cam = null;
     private Animator animator;
 
