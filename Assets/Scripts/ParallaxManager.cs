@@ -28,8 +28,7 @@ public class ParallaxManager : MonoBehaviour
     }
 
     void Update()
-    {
-       
+    { 
         for (int i = 0; i < parallaxLayers.Count; i++)
         {
             var bounds = parallaxRenderers[i].bounds;

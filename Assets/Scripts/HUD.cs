@@ -33,9 +33,4 @@ public class HUD : MonoBehaviour
         scoreText.text = $"Score: {score:D6}";
 
     }
-
-    void Update()
-    {
-
-    }
 }
