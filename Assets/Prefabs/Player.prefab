@@ -10,10 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 2645747810413596419}
   - component: {fileID: 1389004280045163785}
-  - component: {fileID: 1663413876142864301}
   - component: {fileID: 6337448029938031117}
   - component: {fileID: 6074221969030488969}
   - component: {fileID: 8539247167645366902}
+  - component: {fileID: 5244422722911319598}
+  - component: {fileID: 5939861033040630651}
+  - component: {fileID: 4509042819844444386}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -88,22 +90,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1663413876142864301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4791477036918130654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8303ba65551d3554e96182479cac4b48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpForce: 10
-  strength: 0
-  fallSpeed: 0.5
-  isGrounded: 1
 --- !u!50 &6337448029938031117
 Rigidbody2D:
   serializedVersion: 4
@@ -163,7 +149,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.6077448}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -174,7 +160,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.82298684}
   m_EdgeRadius: 0
 --- !u!95 &8539247167645366902
 Animator:
@@ -197,3 +183,44 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5244422722911319598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4791477036918130654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa8570c6507140a46ab548d59d36de6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpForce: 10
+  fallMultiplier: 2.5
+  shortJumpMultiplier: 2
+  isGrounded: 1
+--- !u!114 &5939861033040630651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4791477036918130654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3928a3a49632bac449c8721f9a0234dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementComponent: {fileID: 5244422722911319598}
+--- !u!114 &4509042819844444386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4791477036918130654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5b56cc50d54f5543b1940819d1368b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
