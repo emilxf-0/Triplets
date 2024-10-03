@@ -25,7 +25,7 @@ public class Obstacle : MonoBehaviour
             EventManager.TakeDamage(other.gameObject, 1);
         }
     }
-    // Update is called once per frame
+    
     void Update()
     {
         transform.position += new Vector3(-gameSpeed.speed * Time.deltaTime, 0, 0);
