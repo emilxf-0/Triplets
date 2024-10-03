@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    [SerializeField] private float speed = 0;
+    [SerializeField] private GameSpeedData gameSpeed;
     private SpriteRenderer spriteRenderer = null;
     private Vector3 bounds;
-    
+
     private void Start()
     {
         if (spriteRenderer == null)
@@ -28,7 +28,8 @@ public class Obstacle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += new Vector3(-speed * Time.deltaTime, 0, 0);
+        transform.position += new Vector3(-gameSpeed.speed * Time.deltaTime, 0, 0);
+
         if (transform.position.x < bounds.x)
         {
             Destroy(gameObject);

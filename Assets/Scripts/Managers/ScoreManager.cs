@@ -5,7 +5,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class HiScoreManager : MonoBehaviour
+public class ScoreManager : MonoBehaviour
 {
     [Serializable]
     public class HiScore
@@ -42,6 +42,11 @@ public class HiScoreManager : MonoBehaviour
         {
             currentHiScore = currentScore;
             SaveHiScoreData(currentHiScore);
+        }
+
+        if (currentScore % 10 == 0)
+        {
+            EventManager.SetGameSpeed(5);
         }
     }
     void SaveHiScoreData(int score)

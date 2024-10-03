@@ -17,6 +17,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private List<PrefabEntry> prefabEntries;
     private Dictionary<string, GameObject> prefabDictionary = new();
     private Dictionary<string, float> nextSpawnTimes = new();
+    private float gameSpeed;
 
     void Start()
     {

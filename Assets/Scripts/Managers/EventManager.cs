@@ -1,4 +1,5 @@
 using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,6 +15,7 @@ public static class EventManager
     public static event Action OnGameOver;
     public static event Action OnUpdateHiScore;
     public static event Action<int> OnSetHiScore;
+    public static event Action<float> OnSetGameSpeed;
     public static void PickupDestroyed()
     {
         OnPickUpDestroyed?.Invoke();   
@@ -55,5 +57,10 @@ public static class EventManager
     public static void SetHiScore(int hiScore)
     {
         OnSetHiScore?.Invoke(hiScore);
+    }
+
+    public static void SetGameSpeed(float speed)
+    {
+        OnSetGameSpeed?.Invoke(speed);
     }
 }

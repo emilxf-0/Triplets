@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
-    [SerializeField] private float speed = 5f;
+    [SerializeField] GameSpeedData gameSpeed;
     [SerializeField] private float maxHp = 3;
     [SerializeField] private float hp;
     [SerializeField] PickupType pickupType;
     private SpriteRenderer spriteRenderer = null;
     private int spriteNumber = 0;
     private Vector3 bounds;
+
     private void Start()
     {
         hp = maxHp;
@@ -23,7 +24,7 @@ public class Pickup : MonoBehaviour
 
     private void Update()
     {
-        transform.position += new Vector3(-speed * Time.deltaTime, 0, 0);
+        transform.position += new Vector3(-gameSpeed.speed * Time.deltaTime, 0, 0);
         if (transform.position.x < bounds.x)
         {
             Destroy(gameObject);
