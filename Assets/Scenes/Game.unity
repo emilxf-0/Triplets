@@ -647,6 +647,7 @@ GameObject:
   m_Component:
   - component: {fileID: 597814540}
   - component: {fileID: 597814539}
+  - component: {fileID: 597814541}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Untagged
@@ -667,9 +668,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 4791477036918130654, guid: 4c3164cf721b8aa4ab824ed3dd9477d8, type: 3}
-  life: 3
   spawnPoint: {fileID: 299625998}
-  playerLife: []
+  numberOfPlayerAvatars: 3
+  playerTrail: []
 --- !u!4 &597814540
 Transform:
   m_ObjectHideFlags: 0
@@ -685,6 +686,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &597814541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597814538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed2e912551ddda74a9b5f1608ce9a107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
+  isPlayer: 1
 --- !u!1 &636747579
 GameObject:
   m_ObjectHideFlags: 0
@@ -1025,6 +1040,22 @@ PrefabInstance:
       propertyPath: prefabEntries.Array.data[3].spawnPoint
       value: 
       objectReference: {fileID: 636747580}
+    - target: {fileID: 1018235556418722139, guid: 9025999ab51a87945ba67dcee551e3d5, type: 3}
+      propertyPath: prefabEntries.Array.data[1].maxSpawnInterval
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1018235556418722139, guid: 9025999ab51a87945ba67dcee551e3d5, type: 3}
+      propertyPath: prefabEntries.Array.data[1].minSpawnInterval
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1018235556418722139, guid: 9025999ab51a87945ba67dcee551e3d5, type: 3}
+      propertyPath: prefabEntries.Array.data[2].maxSpawnInterval
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1018235556418722139, guid: 9025999ab51a87945ba67dcee551e3d5, type: 3}
+      propertyPath: prefabEntries.Array.data[2].minSpawnInterval
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 1018235556418722139, guid: 9025999ab51a87945ba67dcee551e3d5, type: 3}
       propertyPath: prefabEntries.Array.data[3].maxSpawnInterval
       value: 120
@@ -1818,7 +1849,7 @@ Transform:
   m_GameObject: {fileID: 2008779230}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -7.75, z: 0}
+  m_LocalPosition: {x: 0, y: -7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

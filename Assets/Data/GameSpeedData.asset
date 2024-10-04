@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: GameSpeedData
   m_EditorClassIdentifier: 
   defaultGameSpeed: 5
-  speed: 5
+  speed: 6

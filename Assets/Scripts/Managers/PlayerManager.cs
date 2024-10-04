@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -44,5 +42,6 @@ public class PlayerManager : MonoBehaviour
         var offset = new Vector3(spacing * numberOfPlayerAvatars, 0, 0);
         var newPlayerAvatar = Instantiate(playerPrefab, spawnPoint.transform.position - offset, Quaternion.identity); 
         playerTrail.Add(newPlayerAvatar);
+        numberOfPlayerAvatars++;
     }
 }

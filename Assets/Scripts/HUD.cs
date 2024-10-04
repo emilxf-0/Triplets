@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using System.IO;
 using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
