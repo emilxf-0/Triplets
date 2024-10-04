@@ -671,6 +671,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 299625998}
   numberOfPlayerAvatars: 3
   playerTrail: []
+  spacing: 3.5
 --- !u!4 &597814540
 Transform:
   m_ObjectHideFlags: 0

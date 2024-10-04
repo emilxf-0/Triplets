@@ -1,3 +1,4 @@
+using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,6 +8,7 @@ public class HUD : MonoBehaviour
     [SerializeField] private TMP_Text scoreText = null;
     [SerializeField] private TMP_Text hiScoreText = null;
     [SerializeField] private Image healthBar = null;
+    private StringBuilder sb;
     private int score = 0;
     void OnEnable()
     {
@@ -25,26 +27,41 @@ public class HUD : MonoBehaviour
     void OnAddScore(int score)
     {
         this.score += score;
-        scoreText.text = $"Score: {this.score:D6}";
+        UpdateScore();
     }
 
     void Awake()
     {
+        sb = new StringBuilder();
     }
 
     void Start()
     {
-        scoreText.text = $"Score: {score:D6}";
-        hiScoreText.text = $"Hiscore: {score:D6}";
+        UpdateScore();
+        UpdateHiScore(score);
     }
 
     void OnSetHiScore(int hiScore)
     {
-        hiScoreText.text = $"Hiscore: {hiScore:D6}";
+        UpdateHiScore(hiScore);
     }
 
     void OnUpdateHealth(float newHealth)
     {
         healthBar.fillAmount = newHealth;
+    }
+
+    void UpdateScore()
+    {
+        sb.Clear();
+        sb.Append("Score: ").AppendFormat("{0:D6}", score);
+        scoreText.text = sb.ToString();
+    }
+
+    void UpdateHiScore(int hiScore)
+    {
+        sb.Clear();
+        sb.Append("Hiscore: ").AppendFormat("{0:D6}", hiScore);
+        hiScoreText.text = sb.ToString();
     }
 }

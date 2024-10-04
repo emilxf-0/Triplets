@@ -7,7 +7,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private int numberOfPlayerAvatars;
     [SerializeField] private List<GameObject> playerTrail = new();
-    private float spacing = 3f;
+    [SerializeField] private float spacing = 4f;
     private HealthComponent healthComponent;
     private void OnEnable()
     {
