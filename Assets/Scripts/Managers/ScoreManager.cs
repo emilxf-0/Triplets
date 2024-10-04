@@ -27,6 +27,7 @@ public class ScoreManager : MonoBehaviour
         EventManager.OnAddScore -= OnAddScore;
     }
 
+
     void Start()
     {
         filePath = Path.Combine(Application.persistentDataPath, "hiScore.json");
@@ -60,6 +61,7 @@ public class ScoreManager : MonoBehaviour
     {
         var json = File.ReadAllText(filePath);
         HiScore hiScoreData = JsonUtility.FromJson<HiScore>(json);
-        EventManager.SetHiScore(hiScoreData.hiScore);   
+        EventManager.SetHiScore(hiScoreData.hiScore);
+        currentHiScore = hiScoreData.hiScore;
     }
 }

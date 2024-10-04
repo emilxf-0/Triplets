@@ -6,49 +6,43 @@ using UnityEngine.SceneManagement;
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] private GameObject playerPrefab;
-    [SerializeField] private int life;
     [SerializeField] private Transform spawnPoint;
-    [SerializeField] private List<GameObject> playerLife = new();
+    [SerializeField] private int numberOfPlayerAvatars;
+    [SerializeField] private List<GameObject> playerTrail = new();
     private float spacing = 3f;
-    
+    private HealthComponent healthComponent;
     private void OnEnable()
     {
-        EventManager.OnTakeDamage += OnTakeDamage;
         EventManager.OnAddLife += OnAddLife;
+        EventManager.OnTakeDamage += OnTakeDamage;
     }
     void Start()
     {   
-        for (int i = 0; i < life; i++)
+        healthComponent = GetComponent<HealthComponent>();        
+
+        for (int i = 0; i < numberOfPlayerAvatars; i++)
         {
             var offset = new Vector3(spacing * i, 0, 0);
-            playerLife.Add(Instantiate(playerPrefab, spawnPoint.transform.position - offset, Quaternion.identity));
+            playerTrail.Add(Instantiate(playerPrefab, spawnPoint.transform.position - offset, Quaternion.identity));
         }
     }
 
     private void OnDisable()
     {
-        EventManager.OnTakeDamage -= OnTakeDamage;
         EventManager.OnAddLife -= OnAddLife;
+        EventManager.OnTakeDamage -= OnTakeDamage;
     }
-
 
     void OnTakeDamage(GameObject gameObject, int damage)
     {
-        life--;
-        Destroy(playerLife[life]);
-        playerLife.RemoveAt(life);
+        healthComponent.TakeDamage(damage);
+    }
 
-        if (life <= 0)
-        {
-            EventManager.GameOver();
-        }
-    }    
 
     void OnAddLife()
     {
-        var offset = new Vector3(spacing * life, 0, 0);
+        var offset = new Vector3(spacing * numberOfPlayerAvatars, 0, 0);
         var newPlayerAvatar = Instantiate(playerPrefab, spawnPoint.transform.position - offset, Quaternion.identity); 
-        playerLife.Add(newPlayerAvatar);
-        life++;
+        playerTrail.Add(newPlayerAvatar);
     }
 }

@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
-    [SerializeField] private float maxHp = 3;
-    [SerializeField] private float hp;
     [SerializeField] PickupType pickupType;
     private SpriteRenderer spriteRenderer = null;
     private int spriteNumber = 0;
@@ -11,7 +9,6 @@ public class Pickup : MonoBehaviour
 
     private void Start()
     {
-        hp = maxHp;
         if (spriteRenderer == null)
         {
             spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -24,21 +21,8 @@ public class Pickup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        hp -= 1;
         pickupType.ApplyEffects(this.gameObject);
         NextSprite();
-        CheckIfDestroyed();
-    }
-
-    private void CheckIfDestroyed()
-    {
-        if (hp > 0)
-        {
-            return;
-        }
-
-        EventManager.PickupDestroyed();
-        Destroy(gameObject);
     }
 
     void NextSprite()
