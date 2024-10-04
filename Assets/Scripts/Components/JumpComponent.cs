@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.AdaptivePerformance.Editor;
 using UnityEngine;
 
-public class MovementComponent : MonoBehaviour
+public class JumpComponent : MonoBehaviour
 {
 
     [SerializeField] private float jumpForce;
