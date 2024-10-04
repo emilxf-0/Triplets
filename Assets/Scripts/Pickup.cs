@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
-    [SerializeField] GameSpeedData gameSpeed;
     [SerializeField] private float maxHp = 3;
     [SerializeField] private float hp;
     [SerializeField] PickupType pickupType;
@@ -22,14 +21,6 @@ public class Pickup : MonoBehaviour
         spriteRenderer.sprite = pickupType.sprites[spriteNumber];
     }
 
-    private void Update()
-    {
-        transform.position += new Vector3(-gameSpeed.speed * Time.deltaTime, 0, 0);
-        if (transform.position.x < bounds.x)
-        {
-            Destroy(gameObject);
-        }
-    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {

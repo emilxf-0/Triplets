@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7815171622159441527}
   - component: {fileID: 404653253412491953}
   - component: {fileID: 3918986735302548593}
+  - component: {fileID: -5848221083709605279}
   m_Layer: 0
   m_Name: Obstacle
   m_TagString: Untagged
@@ -98,7 +99,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb566072cb321764087bdd3943d60d31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
   gameSpeed: {fileID: 11400000, guid: 59ed03bef58110d49aee1a2ad1087737, type: 2}
 --- !u!70 &3918986735302548593
 CapsuleCollider2D:
@@ -135,3 +135,16 @@ CapsuleCollider2D:
   m_Offset: {x: -0.012553692, y: -0.32}
   m_Size: {x: 0.69033337, y: 1.5942241}
   m_Direction: 0
+--- !u!114 &-5848221083709605279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3576559869350801430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96ba19638212a834d80367b2f2ebf4df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameSpeedData: {fileID: 11400000, guid: 59ed03bef58110d49aee1a2ad1087737, type: 2}

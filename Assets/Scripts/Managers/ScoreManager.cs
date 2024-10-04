@@ -46,7 +46,7 @@ public class ScoreManager : MonoBehaviour
 
         if (currentScore % 10 == 0)
         {
-            EventManager.SetGameSpeed(5);
+            EventManager.SetGameSpeed(1);
         }
     }
     void SaveHiScoreData(int score)

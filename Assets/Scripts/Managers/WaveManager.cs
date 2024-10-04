@@ -12,6 +12,7 @@ public class WaveManager : MonoBehaviour
         public float minSpawnInterval;
         public float maxSpawnInterval;
         public Transform spawnPoint;
+        public float spawnNoise;
     }
 
     [SerializeField] private List<PrefabEntry> prefabEntries;
@@ -35,18 +36,18 @@ public class WaveManager : MonoBehaviour
         {
             if (Time.time >= nextSpawnTimes[prefab.key])
             {
-                SpawnObject(prefab.key, prefab.spawnPoint); 
+                SpawnObject(prefab.key, prefab.spawnPoint, prefab.spawnNoise); 
                 SetNextSpawnInterval(prefab.key, prefab.minSpawnInterval, prefab.maxSpawnInterval);
             }
         
         }
 
     }
-    void SpawnObject(string key, Transform spawnPoint)
+    void SpawnObject(string key, Transform spawnPoint, float spawnNoise)
     {
         if (prefabDictionary.TryGetValue(key, out GameObject prefab))
         {
-            Instantiate(prefab, spawnPoint.transform.position, Quaternion.identity);
+            Instantiate(prefab, spawnPoint.transform.position + new Vector3(0, UnityEngine.Random.Range(-spawnNoise, spawnNoise)), Quaternion.identity);
         }
         else
         {
