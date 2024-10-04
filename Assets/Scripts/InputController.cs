@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
-    private MovementComponent movementComponent;
+    private JumpComponent jumpComponent;
     private Collider2D playerCollider = null;
     private Camera cam = null;
 
     void Start()
     {
-        movementComponent = GetComponent<MovementComponent>();
+        jumpComponent = GetComponent<JumpComponent>();
         playerCollider = gameObject.GetComponent<Collider2D>();
         cam = Camera.main;
     }
@@ -23,14 +23,15 @@ public class InputController : MonoBehaviour
             Touch touch = Input.GetTouch(0);
 
             Vector2 touchPosition = cam.ScreenToWorldPoint(touch.position);
-
-            if (playerCollider.OverlapPoint(touchPosition) && movementComponent.IsGrounded())
+            
+            //TODO: Clean this check up
+            if (touchPosition.y < transform.position.y && touchPosition.x > (transform.position.x - 1) && touchPosition.x < (transform.position.x + 1) && jumpComponent.IsGrounded())
             {
-                movementComponent.Jump();
+                jumpComponent.Jump();
             }
         }
 
-        movementComponent.Falling();
+        jumpComponent.Falling();
 
     }
 }

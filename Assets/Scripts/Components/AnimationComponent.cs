@@ -5,7 +5,7 @@ using UnityEngine;
 public class AnimationComponent : MonoBehaviour
 {
     private Animator animator;
-    private MovementComponent movementComponent;
+    private JumpComponent movementComponent;
 
     void OnEnable()
     {
@@ -28,7 +28,7 @@ public class AnimationComponent : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        movementComponent = GetComponent<MovementComponent>();
+        movementComponent = GetComponent<JumpComponent>();
     }
 
     // Update is called once per frame
