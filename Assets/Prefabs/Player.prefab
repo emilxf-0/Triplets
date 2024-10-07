@@ -198,8 +198,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 10
-  fallMultiplier: 3
-  shortJumpMultiplier: 4
+  fallMultiplier: 6
+  shortJumpMultiplier: 3
+  friction: 0.4
   isGrounded: 1
 --- !u!114 &5939861033040630651
 MonoBehaviour:

@@ -6,6 +6,7 @@ public class JumpComponent : MonoBehaviour
     [SerializeField] private float jumpForce;
     [SerializeField] private float fallMultiplier;
     [SerializeField] private float shortJumpMultiplier;
+    [SerializeField] private float friction = 0;
     public bool isGrounded = true;
     private Rigidbody2D rb = null;
 
@@ -13,7 +14,14 @@ public class JumpComponent : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
-
+    public void Jump()
+    {
+        if (isGrounded)
+        {
+            rb.velocity = Vector2.up * jumpForce;
+            isGrounded = false;
+        }
+    }
     public void Falling()
     {
         if (rb.velocity.y < 0)
@@ -26,14 +34,14 @@ public class JumpComponent : MonoBehaviour
         }
     }
 
-    public void Jump()
+    public void ApplyFriction()
     {
-        if (isGrounded)
+        if (rb.velocity.y > 0)
         {
-            rb.velocity = Vector2.up * jumpForce;
-            isGrounded = false;
+            rb.velocity += friction * Physics2D.gravity.y * Time.deltaTime * Vector2.up;
         }
     }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

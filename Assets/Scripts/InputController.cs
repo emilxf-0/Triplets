@@ -29,7 +29,9 @@ public class InputController : MonoBehaviour
             }
         }
 
+        jumpComponent.ApplyFriction();
         jumpComponent.Falling();
+
 
     }
 }
