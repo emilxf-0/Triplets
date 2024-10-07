@@ -6,6 +6,7 @@ public class HealthComponent : MonoBehaviour
     [SerializeField] private bool isPlayer;
     private float currentHealth;
 
+    public float CurrentHealth => currentHealth;
 
     void Awake()
     {

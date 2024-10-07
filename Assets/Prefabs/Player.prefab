@@ -151,7 +151,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.059072763, y: -0.5318204}
+  m_Offset: {x: 0.009476036, y: -0.5318204}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -162,7 +162,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.716451, y: 0.3749683}
+  m_Size: {x: 0.5793534, y: 0.3749683}
   m_EdgeRadius: 0
 --- !u!95 &8539247167645366902
 Animator:
@@ -271,6 +271,6 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.049138308, y: 0.59512115}
+  m_Offset: {x: 0.08, y: 0.38}
   serializedVersion: 2
-  m_Radius: 0.7505646
+  m_Radius: 0.62

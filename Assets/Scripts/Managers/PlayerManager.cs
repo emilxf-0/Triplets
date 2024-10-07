@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
@@ -8,10 +9,11 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private int numberOfPlayerAvatars;
     [SerializeField] private List<GameObject> playerTrail = new();
     [SerializeField] private float spacing = 4f;
+    [SerializeField] private int maxAvatars = 6;
     private HealthComponent healthComponent;
     private void OnEnable()
     {
-        EventManager.OnAddLife += OnAddLife;
+        EventManager.OnAddAvatar += OnAddAvatar;
         EventManager.OnTakeDamage += OnTakeDamage;
     }
     void Start()
@@ -27,7 +29,7 @@ public class PlayerManager : MonoBehaviour
 
     private void OnDisable()
     {
-        EventManager.OnAddLife -= OnAddLife;
+        EventManager.OnAddAvatar -= OnAddAvatar;
         EventManager.OnTakeDamage -= OnTakeDamage;
     }
 
@@ -37,8 +39,13 @@ public class PlayerManager : MonoBehaviour
     }
 
 
-    void OnAddLife()
+    void OnAddAvatar()
     {
+        if (playerTrail.Count >= maxAvatars)
+        {
+            return;
+        } 
+        
         var offset = new Vector3(spacing * numberOfPlayerAvatars, 0, 0);
         var newPlayerAvatar = Instantiate(playerPrefab, spawnPoint.transform.position - offset, Quaternion.identity); 
         playerTrail.Add(newPlayerAvatar);

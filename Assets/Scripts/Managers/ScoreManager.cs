@@ -12,6 +12,7 @@ public class ScoreManager : MonoBehaviour
 
     private int currentHiScore = 0;
     private int currentScore = 0;
+    private int applesPicked = 0;
     private string filePath; 
     
     void OnEnable()
@@ -29,12 +30,14 @@ public class ScoreManager : MonoBehaviour
     {
         filePath = Path.Combine(Application.persistentDataPath, "hiScore.json");
         
+        //Fix race condition
         Invoke(nameof(SetHiscore), 0.1f);
     }
 
     public void OnAddScore(int score)
     {
         currentScore += score;
+        applesPicked ++;
 
         if (currentScore > currentHiScore)
         {
@@ -42,7 +45,7 @@ public class ScoreManager : MonoBehaviour
             SaveHiScoreData(currentHiScore);
         }
 
-        if (currentScore % 10 == 0)
+        if (applesPicked % 5 == 0)
         {
             EventManager.SetGameSpeed(1);
         }
