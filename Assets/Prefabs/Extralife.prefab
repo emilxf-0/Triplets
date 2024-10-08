@@ -17,6 +17,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 157561485664088394, guid: 827e6cdf5cd86e743989a5cb3dea02ec, type: 3}
+      propertyPath: pickupFX
+      value: 
+      objectReference: {fileID: 3286651599881030014, guid: 0220df64698b0dd488e1f6b431d93f13, type: 3}
+    - target: {fileID: 157561485664088394, guid: 827e6cdf5cd86e743989a5cb3dea02ec, type: 3}
       propertyPath: pickupType
       value: 
       objectReference: {fileID: 11400000, guid: 9c51ac7d3b203944282908574b9cc581, type: 2}

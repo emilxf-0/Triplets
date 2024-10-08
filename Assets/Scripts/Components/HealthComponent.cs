@@ -30,6 +30,7 @@ public class HealthComponent : MonoBehaviour
             {
                 EventManager.GameOver();
             }
+            
             Destroy(gameObject);
         }
     }
