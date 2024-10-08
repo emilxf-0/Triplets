@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb0baf68cdc7a4146b817f21111874e2, type: 3}
   m_Name: GameSpeedData
   m_EditorClassIdentifier: 
-  defaultGameSpeed: 5
-  speed: 6
+  defaultGameSpeed: 7
+  speed: 5
