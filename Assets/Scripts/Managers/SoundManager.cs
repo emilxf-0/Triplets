@@ -37,6 +37,7 @@ public class SoundManager : MonoBehaviour
     {
         sfxAudioSource = Instantiate(audioSource);
         musicAudioSource = Instantiate(sfxAudioSource);
+        musicAudioSource.loop = true;
         PlayMusic(gameMusic);
     }
 
