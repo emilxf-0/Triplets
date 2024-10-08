@@ -2,7 +2,8 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+using DG.Tweening;
+using UnityEngine.Networking;
 public class HUD : MonoBehaviour
 {
     [SerializeField] private TMP_Text scoreText = null;
@@ -10,6 +11,7 @@ public class HUD : MonoBehaviour
     [SerializeField] private Image healthBar = null;
     private StringBuilder sb;
     private int score = 0;
+    private int newScore = 0;
     void OnEnable()
     {
         EventManager.OnAddScore += OnAddScore;
@@ -26,8 +28,19 @@ public class HUD : MonoBehaviour
 
     void OnAddScore(int score)
     {
-        this.score += score;
+        newScore = this.score + score;
         UpdateScore();
+        
+        DOTween.To(() => this.score, x => this.score = x, newScore, 1.5f)
+        .OnUpdate(() => UpdateScore())
+        .OnComplete(() => UpdateScore());
+    }
+    void UpdateScore()
+    {
+        sb.Clear();
+        sb.Append("Score: ").AppendFormat("{0:D6}", score);
+        scoreText.text = sb.ToString();
+
     }
 
     void Awake()
@@ -51,12 +64,7 @@ public class HUD : MonoBehaviour
         healthBar.fillAmount = newHealth;
     }
 
-    void UpdateScore()
-    {
-        sb.Clear();
-        sb.Append("Score: ").AppendFormat("{0:D6}", score);
-        scoreText.text = sb.ToString();
-    }
+
 
     void UpdateHiScore(int hiScore)
     {
