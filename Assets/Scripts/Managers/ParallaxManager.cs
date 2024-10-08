@@ -13,11 +13,11 @@ public class ParallaxManager : MonoBehaviour
 
     public GameObject parallaxLayerPrefab;
     [SerializeField] private List<Parallax> parallax;
-    private List<GameObject> parallaxLayers = new();
+    [SerializeField] GameSpeedData gameSpeedData;
+    private List<GameObject> parallaxLayers        = new();
     private List<SpriteRenderer> parallaxRenderers = new();
     private float screenWidthInWorld;
     private float textureWidth;
-    [SerializeField] GameSpeedData gameSpeedData;
     void Start()
     {
 

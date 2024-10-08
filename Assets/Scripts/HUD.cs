@@ -6,23 +6,24 @@ using DG.Tweening;
 using UnityEngine.Networking;
 public class HUD : MonoBehaviour
 {
-    [SerializeField] private TMP_Text scoreText = null;
+    [SerializeField] private TMP_Text scoreText   = null;
     [SerializeField] private TMP_Text hiScoreText = null;
-    [SerializeField] private Image healthBar = null;
+    [SerializeField] private Image healthBar      = null;
     private StringBuilder sb;
-    private int score = 0;
+    private int score    = 0;
     private int newScore = 0;
+    
     void OnEnable()
     {
-        EventManager.OnAddScore += OnAddScore;
-        EventManager.OnSetHiScore += OnSetHiScore;
+        EventManager.OnAddScore     += OnAddScore;
+        EventManager.OnSetHiScore   += OnSetHiScore;
         EventManager.OnUpdateHealth += OnUpdateHealth;
     }
 
     void OnDisable()
     {
-        EventManager.OnAddScore -= OnAddScore;
-        EventManager.OnSetHiScore -= OnSetHiScore;
+        EventManager.OnAddScore     -= OnAddScore;
+        EventManager.OnSetHiScore   -= OnSetHiScore;
         EventManager.OnUpdateHealth -= OnUpdateHealth;
     }
 
@@ -35,6 +36,7 @@ public class HUD : MonoBehaviour
         .OnUpdate(() => UpdateScore())
         .OnComplete(() => UpdateScore());
     }
+
     void UpdateScore()
     {
         sb.Clear();
