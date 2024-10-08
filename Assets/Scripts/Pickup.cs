@@ -4,6 +4,7 @@ using UnityEngine;
 public class Pickup : MonoBehaviour
 {
     [SerializeField] PickupType pickupType;
+    [SerializeField] VFX pickupFX;
     private HealthComponent healthComponent = null;
     private SpriteRenderer spriteRenderer = null;
     private int spriteNumber = 0;
@@ -28,6 +29,8 @@ public class Pickup : MonoBehaviour
         //Has to be "1" because Takedamage() triggers after OnTriggerEnter
         if (healthComponent.CurrentHealth <= 1)
         {
+            var fx = Instantiate(pickupFX, transform.position + new Vector3(0,0,-5), Quaternion.identity);
+            fx.Play();
             pickupType.ApplyEffects(this.gameObject);
         }
 
