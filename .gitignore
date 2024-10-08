@@ -70,3 +70,10 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Ignore DOTween's generated files
+/Assets/DOTween/DOTweenSettings.asset
+/Assets/DOTween/Modules/
+/Assets/Demigiant/DOTween/Modules/
+/Assets/Plugins/DOTween/DOTween.dll
+/Assets/Plugins/DOTween/DOTweenEditor.dll
