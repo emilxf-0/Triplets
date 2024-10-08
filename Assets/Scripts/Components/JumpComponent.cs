@@ -20,6 +20,7 @@ public class JumpComponent : MonoBehaviour
         {
             rb.velocity = Vector2.up * jumpForce;
             isGrounded = false;
+            EventManager.PlayerJump();
         }
     }
     public void Falling()
