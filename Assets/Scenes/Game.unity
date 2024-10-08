@@ -1971,10 +1971,27 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: fe6cccfd417da924cbaaf55b06bfc476, type: 3}
     - target: {fileID: 5169592750469576506, guid: f3b812601e3468245a56f85eeb9386bc, type: 3}
+      propertyPath: extraLife
+      value: 
+      objectReference: {fileID: 8300000, guid: 3dcf1b13091afe84aa1848f55d4288ff, type: 3}
+    - target: {fileID: 5169592750469576506, guid: f3b812601e3468245a56f85eeb9386bc, type: 3}
       propertyPath: gameMusic
       value: 
       objectReference: {fileID: 8300000, guid: d37dc237ed7bd7a499d72745fb640a48, type: 3}
-    m_RemovedComponents: []
+    - target: {fileID: 5169592750469576506, guid: f3b812601e3468245a56f85eeb9386bc, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 3807581054163587471, guid: 126448f960f3db046a99b166d60f22f6, type: 3}
+    - target: {fileID: 5169592750469576506, guid: f3b812601e3468245a56f85eeb9386bc, type: 3}
+      propertyPath: vfxAudioSource
+      value: 
+      objectReference: {fileID: 3807581054163587471, guid: 126448f960f3db046a99b166d60f22f6, type: 3}
+    - target: {fileID: 5169592750469576506, guid: f3b812601e3468245a56f85eeb9386bc, type: 3}
+      propertyPath: musicAudioSource
+      value: 
+      objectReference: {fileID: 3807581054163587471, guid: 126448f960f3db046a99b166d60f22f6, type: 3}
+    m_RemovedComponents:
+    - {fileID: 4214548082205607000, guid: f3b812601e3468245a56f85eeb9386bc, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
