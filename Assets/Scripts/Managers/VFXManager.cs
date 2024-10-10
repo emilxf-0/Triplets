@@ -43,11 +43,15 @@ public class VFXManager : MonoBehaviour
 
         startScore = 0;
 
-        DOTween.To(() => startScore, x => startScore = x, mostRecentScore, 1.5f)
+        DOTween.To(() => startScore, x => startScore = x, mostRecentScore, 1f).SetId(fx)
         .OnUpdate(() => UpdateScore(text))
         .OnComplete(() => UpdateScore(text));
 
-        fx.transform.DOMoveY(transform.position.y + 2, 1f).OnComplete(() => Destroy(fx));
+        fx.transform.DOMoveY(transform.position.y + 2, 1f).SetId(fx).OnComplete(() => 
+        {
+            DOTween.Kill(fx);
+            Destroy(fx);   
+        });
     }
 
     void Start()
