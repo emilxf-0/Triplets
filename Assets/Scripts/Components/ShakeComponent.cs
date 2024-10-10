@@ -35,9 +35,14 @@ public class ShakeComponent : MonoBehaviour
     {
         Shake();
     }
+
     void Shake()
     {
-        transform.DOShakePosition(shakeTime, shakeStrength).OnComplete(() => transform.position = startPos);       
+        transform.DOShakePosition(shakeTime, shakeStrength).SetId(this).OnComplete(() => 
+        {
+            transform.position = startPos;
+            DOTween.Kill(this);
+        });       
     }
 
 }
