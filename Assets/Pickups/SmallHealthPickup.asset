@@ -17,3 +17,5 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 46b6bc3dca65a4844b345637777342c0, type: 3}
   effects:
   - {fileID: 11400000, guid: 595a3ae913394024ea4d96fc9430c75e, type: 2}
+  vfx:
+  - {fileID: 11400000, guid: ddf1ad66944532046a584e744eab9284, type: 2}

@@ -12,6 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62924e48e19ecbe4d8851a872072c29a, type: 3}
   m_Name: FlyingTextVFX
   m_EditorClassIdentifier: 
-  scoreData: {fileID: 0}
-  points: 0
-  vfx: {fileID: 0}
+  vfx: {fileID: 1791580288817542149, guid: e5c2710a0975dbb47b4b4d8b21d79d99, type: 3}

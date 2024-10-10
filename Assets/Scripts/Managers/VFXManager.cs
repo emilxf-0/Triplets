@@ -8,7 +8,8 @@ using TMPro;
 
 public class VFXManager : MonoBehaviour
 {
-    private float mostRecentScore = 0;
+    private int mostRecentScore = 0;
+    private int startScore = 0;
 
     void OnEnable()
     {
@@ -40,18 +41,23 @@ public class VFXManager : MonoBehaviour
         var text = fx.GetComponentInChildren<TMP_Text>();
         text.text = mostRecentScore.ToString();
 
+        startScore = 0;
+
+        DOTween.To(() => startScore, x => startScore = x, mostRecentScore, 1.5f)
+        .OnUpdate(() => UpdateScore(text))
+        .OnComplete(() => UpdateScore(text));
+
         fx.transform.DOMoveY(transform.position.y + 2, 1f).OnComplete(() => Destroy(fx));
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    void UpdateScore(TMP_Text scoreText)
     {
-        
+        scoreText.text = startScore.ToString();    
     }
+
 }

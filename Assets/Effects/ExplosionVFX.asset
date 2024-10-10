@@ -12,6 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1bd05f15236a3c45b4b7b8c08b262c2, type: 3}
   m_Name: ExplosionVFX
   m_EditorClassIdentifier: 
-  scoreData: {fileID: 0}
-  points: 0
-  vfx: {fileID: 0}
+  vfx: {fileID: 2266516510194672152, guid: 8f5385b94798809438c1d9e8c41058bb, type: 3}

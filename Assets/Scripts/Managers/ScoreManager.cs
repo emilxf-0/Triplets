@@ -61,8 +61,8 @@ public class ScoreManager : MonoBehaviour
 
     void SetHiscore()
     {
-        var hiScoreData    = JsonUtility.FromJson<HiScore>(json);
         var json           = File.ReadAllText(filePath);
+        var hiScoreData    = JsonUtility.FromJson<HiScore>(json);
         currentHiScore     = hiScoreData.hiScore;
         EventManager.SetHiScore(hiScoreData.hiScore);
     }
