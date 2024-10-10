@@ -13,7 +13,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] ScoreData scoreData;
 
     private int currentHiScore = 0;
-    private int applesPicked = 0;
+    private int applesPicked   = 0;
     private string filePath;
 
     void OnEnable()
@@ -54,16 +54,16 @@ public class ScoreManager : MonoBehaviour
 
     void SaveHiScoreData(int score)
     {
-        HiScore hiScoreData = new HiScore { hiScore = score };
-        var json = JsonUtility.ToJson(hiScoreData);
+        var hiScoreData = new HiScore { hiScore = score };
+        var json        = JsonUtility.ToJson(hiScoreData);
         File.WriteAllText(filePath, json);
     }
 
     void SetHiscore()
     {
-        var json = File.ReadAllText(filePath);
-        HiScore hiScoreData = JsonUtility.FromJson<HiScore>(json);
+        var hiScoreData    = JsonUtility.FromJson<HiScore>(json);
+        var json           = File.ReadAllText(filePath);
+        currentHiScore     = hiScoreData.hiScore;
         EventManager.SetHiScore(hiScoreData.hiScore);
-        currentHiScore = hiScoreData.hiScore;
     }
 }

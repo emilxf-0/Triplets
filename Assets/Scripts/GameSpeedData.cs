@@ -28,6 +28,5 @@ public class GameSpeedData : ScriptableObject
     void OnSetGameSpeed(float gameSpeed)
     {
         speed += gameSpeed;
-        Debug.Log("Gamespeed" + speed);
     }
 }
