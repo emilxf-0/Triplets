@@ -42,7 +42,6 @@ public class HUD : MonoBehaviour
         sb.Clear();
         sb.Append("Score: ").AppendFormat("{0:D6}", score);
         scoreText.text = sb.ToString();
-
     }
 
     void Awake()
@@ -65,8 +64,6 @@ public class HUD : MonoBehaviour
     {
         healthBar.fillAmount = newHealth;
     }
-
-
 
     void UpdateHiScore(int hiScore)
     {

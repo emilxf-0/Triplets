@@ -9,10 +9,6 @@ public class VFX : MonoBehaviour
     void Start()
     {
         particles = GetComponent<ParticleSystem>();
-    }
-
-    public void Play()
-    {
         Invoke(nameof(DestroyVFX), 1f);
     }
 

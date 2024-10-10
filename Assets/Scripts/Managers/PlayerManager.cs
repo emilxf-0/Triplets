@@ -8,14 +8,17 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private int numberOfPlayerAvatars;
     [SerializeField] private List<GameObject> playerTrail = new();
-    [SerializeField] private float spacing = 4f;
-    [SerializeField] private int maxAvatars = 6;
+    [SerializeField] private float spacing                = 4f;
+    [SerializeField] private int maxAvatars               = 6;
     private HealthComponent healthComponent;
+    
     private void OnEnable()
     {
-        EventManager.OnAddAvatar += OnAddAvatar;
+        EventManager.OnAddAvatar  += OnAddAvatar;
         EventManager.OnTakeDamage += OnTakeDamage;
+        EventManager.OnGainLife   += OnGainLife;
     }
+    
     void Start()
     {   
         healthComponent = GetComponent<HealthComponent>();        
@@ -25,19 +28,26 @@ public class PlayerManager : MonoBehaviour
             var offset = new Vector3(spacing * i, 0, 0);
             playerTrail.Add(Instantiate(playerPrefab, spawnPoint.transform.position - offset, Quaternion.identity));
         }
+
+        EventManager.MultiplierChange(numberOfPlayerAvatars);
     }
 
     private void OnDisable()
     {
-        EventManager.OnAddAvatar -= OnAddAvatar;
+        EventManager.OnAddAvatar  -= OnAddAvatar;
         EventManager.OnTakeDamage -= OnTakeDamage;
+        EventManager.OnGainLife   -= OnGainLife;
+    }
+
+    void OnGainLife(GameObject gameObject, int healAmount)
+    {
+        healthComponent.GainLife(healAmount);
     }
 
     void OnTakeDamage(GameObject gameObject, int damage)
     {
         healthComponent.TakeDamage(damage);
     }
-
 
     void OnAddAvatar()
     {
@@ -50,5 +60,7 @@ public class PlayerManager : MonoBehaviour
         var newPlayerAvatar = Instantiate(playerPrefab, spawnPoint.transform.position - offset, Quaternion.identity); 
         playerTrail.Add(newPlayerAvatar);
         numberOfPlayerAvatars++;
+
+        EventManager.MultiplierChange(numberOfPlayerAvatars);
     }
 }

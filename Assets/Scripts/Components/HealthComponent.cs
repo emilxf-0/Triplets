@@ -5,12 +5,31 @@ public class HealthComponent : MonoBehaviour
     [SerializeField] private float maxHealth;
     [SerializeField] private bool isPlayer;
     private float currentHealth;
+    private float updatedHealth;
 
-    public float CurrentHealth => currentHealth;
+    public float CurrentHealth()
+    {
+        return currentHealth;
+    }
 
     void Awake()
     {
         currentHealth = maxHealth;
+    }
+
+    public void GainLife(float health)
+    {
+        currentHealth += health;
+
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+
+        if (isPlayer)
+        {
+            UpdateHealth();
+        }
     }
 
     public void TakeDamage(int damage)
@@ -19,10 +38,9 @@ public class HealthComponent : MonoBehaviour
 
         if (isPlayer)
         {
-            var updatedHealth = currentHealth / maxHealth;
-            EventManager.UpdateHealth(updatedHealth);
+            UpdateHealth();
         }
-        
+
 
         if (currentHealth <= 0)
         {
@@ -30,8 +48,14 @@ public class HealthComponent : MonoBehaviour
             {
                 EventManager.GameOver();
             }
-            
+
             Destroy(gameObject);
         }
+    }
+
+    void UpdateHealth()
+    {
+        updatedHealth = currentHealth / maxHealth;
+        EventManager.UpdateHealth(updatedHealth);
     }
 }

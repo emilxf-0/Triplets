@@ -7,6 +7,8 @@ public class PickupType : ScriptableObject
     public string pickupName;
     public List<Sprite> sprites;
     public List<ScriptableObject> effects;
+    public List<ScriptableObject> vfx;
+    
 
     public void ApplyEffects(GameObject gameObject)
     {
@@ -15,6 +17,18 @@ public class PickupType : ScriptableObject
             if (effect is IPickupEffect pickupEffect)
             {
                 pickupEffect.ApplyEffect(gameObject);
+            }
+        }
+
+    }
+
+    public void ApplyVFX(Vector3 position)
+    {
+        foreach (var effect in vfx)
+        {
+            if (effect is IVfx vfxEffect)
+            {
+                vfxEffect.ApplyVFX(position);
             }
         }
     }

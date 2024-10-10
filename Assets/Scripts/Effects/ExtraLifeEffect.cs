@@ -6,6 +6,6 @@ public class ExtraLifeEffect : ScriptableObject, IPickupEffect
     
     public void ApplyEffect(GameObject player)
     {   
-        EventManager.AddLife();
+        EventManager.AddAvatar();
     }
 }

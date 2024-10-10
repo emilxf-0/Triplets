@@ -10,11 +10,12 @@ public class ScoreManager : MonoBehaviour
         public int hiScore;
     }
 
+    [SerializeField] ScoreData scoreData;
+
     private int currentHiScore = 0;
-    private int currentScore = 0;
     private int applesPicked = 0;
-    private string filePath; 
-    
+    private string filePath;
+
     void OnEnable()
     {
         EventManager.OnAddScore += OnAddScore;
@@ -24,7 +25,6 @@ public class ScoreManager : MonoBehaviour
     {
         EventManager.OnAddScore -= OnAddScore;
     }
-
 
     void Start()
     {
@@ -36,12 +36,13 @@ public class ScoreManager : MonoBehaviour
 
     public void OnAddScore(int score)
     {
-        currentScore += score;
-        applesPicked ++;
+        scoreData.currentScore += score;
 
-        if (currentScore > currentHiScore)
+        applesPicked++;
+
+        if (scoreData.currentScore > currentHiScore)
         {
-            currentHiScore = currentScore;
+            currentHiScore = scoreData.currentScore;
             SaveHiScoreData(currentHiScore);
         }
 
@@ -50,9 +51,10 @@ public class ScoreManager : MonoBehaviour
             EventManager.SetGameSpeed(1);
         }
     }
+
     void SaveHiScoreData(int score)
     {
-        HiScore hiScoreData = new HiScore {hiScore = score};
+        HiScore hiScoreData = new HiScore { hiScore = score };
         var json = JsonUtility.ToJson(hiScoreData);
         File.WriteAllText(filePath, json);
     }
