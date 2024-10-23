@@ -36,7 +36,8 @@ public class HUD : MonoBehaviour
         newScore = this.score + score;
         UpdateScore();
         
-        DOTween.To(() => this.score, x => this.score = x, newScore, 1.5f).SetId(this)
+        DOTween.Kill("ScoreTween");
+        DOTween.To(() => this.score, x => this.score = x, newScore, 1.5f).SetId("ScoreTween")
         .OnUpdate(() => UpdateScore())
         .OnComplete(() => UpdateScore());
     }
@@ -45,7 +46,9 @@ public class HUD : MonoBehaviour
     {
         multiplierText.text = $"X{multiplier.ToString()}";
 
-        multiplierTransform.DOPunchScale(new Vector3(1, 1, 1), 1f).SetId(this);
+        DOTween.Kill("MultiplierTween");
+
+        multiplierTransform.DOPunchScale(new Vector3(1f, 1f, 0), 1f).SetId("MultiplierTween");
     }
 
     void UpdateScore()
@@ -58,6 +61,7 @@ public class HUD : MonoBehaviour
     void Awake()
     {
         sb = new StringBuilder();
+        
         multiplierTransform = multiplierText.GetComponent<RectTransform>();
     }
 
@@ -86,6 +90,7 @@ public class HUD : MonoBehaviour
 
     void OnDestroy()
     {
-        DOTween.Kill(this);
+        DOTween.Kill("ScoreTween");
+        DOTween.Kill("MultiplierTween");
     }
 }

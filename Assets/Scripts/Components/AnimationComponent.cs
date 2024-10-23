@@ -29,7 +29,6 @@ public class AnimationComponent : MonoBehaviour
         movementComponent = GetComponent<JumpComponent>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (movementComponent.IsGrounded())

@@ -22,6 +22,10 @@ public static class EventManager
     public static event Action<int>                     OnMultiplierChange;
     public static event Action<GameObject, Vector3>     OnExplosionVFX;
     public static event Action<GameObject, Vector3>     OnFlyingNumberVFX;
+    public static event Action                          OnUpdateTutorial;
+    public static event Action<string>                  OnSpawnTutorialItem;
+    public static event Action                          OnStartTutorial;
+    public static event Action<GameObject, string>      OnGotDestroyedOffScreen;
 
     public static void PickupDestroyed()                                        => OnPickUpDestroyed?.Invoke();
     public static void Spawn(GameObject gameObject)                             => OnSpawn?.Invoke(gameObject);
@@ -40,4 +44,8 @@ public static class EventManager
     public static void MultiplierChange(int number)                             => OnMultiplierChange?.Invoke(number);
     public static void ExplosionVFX(GameObject gameObject, Vector3 position)    => OnExplosionVFX?.Invoke(gameObject, position);
     public static void FlyingNumberVFX(GameObject gameObject, Vector3 position) => OnFlyingNumberVFX?.Invoke(gameObject, position);
+    public static void UpdateTutorial()                                         => OnUpdateTutorial?.Invoke();
+    public static void SpawnTutorialItem(string key)                            => OnSpawnTutorialItem?.Invoke(key);
+    public static void StartTutorial()                                          => OnStartTutorial?.Invoke();
+    public static void GotDestroyedOffScreen(GameObject gameObject, string key) => OnGotDestroyedOffScreen?.Invoke(gameObject, key);
 }

@@ -2,18 +2,19 @@ using UnityEngine;
 
 public class JumpComponent : MonoBehaviour
 {
-
     [SerializeField] private float jumpForce;
     [SerializeField] private float fallMultiplier;
     [SerializeField] private float shortJumpMultiplier;
     [SerializeField] private float friction = 0;
+
     public bool isGrounded = true;
     private Rigidbody2D rb = null;
 
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
+
     public void Jump()
     {
         if (isGrounded)
@@ -23,6 +24,7 @@ public class JumpComponent : MonoBehaviour
             EventManager.PlayerJump();
         }
     }
+
     public void Falling()
     {
         if (rb.velocity.y < 0)
@@ -42,7 +44,6 @@ public class JumpComponent : MonoBehaviour
             rb.velocity += friction * Physics2D.gravity.y * Time.deltaTime * Vector2.up;
         }
     }
-
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

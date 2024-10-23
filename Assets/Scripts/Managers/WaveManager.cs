@@ -16,21 +16,56 @@ public class WaveManager : MonoBehaviour
     }
 
     [SerializeField] private List<PrefabEntry> prefabEntries;
-    private Dictionary<string, GameObject> prefabDictionary = new();
+    [SerializeField] private bool isTutorial;
+    
+    private Dictionary<string, PrefabEntry> prefabDictionary = new();
     private Dictionary<string, float> nextSpawnTimes = new();
     private float gameSpeed;
+    
+    void OnEnable()
+    {
+        EventManager.OnStartTutorial += OnStartTutorial;
+        EventManager.OnSpawnTutorialItem += SpawnTutorialObject;
+        EventManager.OnStartGame += EndTutorial;
+    }
+
+    void OnDisable()
+    {
+        EventManager.OnStartTutorial -= OnStartTutorial;
+        EventManager.OnSpawnTutorialItem -= SpawnTutorialObject;
+        EventManager.OnStartGame -= EndTutorial;
+    }
+
+    void OnStartTutorial()
+    {
+        isTutorial = true;
+    }
+
+    void EndTutorial()
+    {
+        isTutorial = false;
+    }
+
+    void SpawnTutorialObject(string key)
+    {
+        SpawnObject(key, prefabDictionary[key].spawnPoint, 0);
+    }
 
     void Start()
     {
-        foreach (var prefab in prefabEntries)
+        for (int i = 0; i < prefabEntries.Count; i++)
         {
-            prefabDictionary.Add(prefab.key, prefab.gameObject);
-            SetNextSpawnInterval(prefab.key, prefab.minSpawnInterval, prefab.maxSpawnInterval);
+            prefabDictionary.Add(prefabEntries[i].key, prefabEntries[i]);
+            SetNextSpawnInterval(prefabEntries[i].key, prefabEntries[i].minSpawnInterval, prefabEntries[i].maxSpawnInterval);
         }
     }
 
     void Update()
     {
+        if (isTutorial)
+        {
+            return;
+        }
 
         foreach (var prefab in prefabEntries)
         {
@@ -38,16 +73,16 @@ public class WaveManager : MonoBehaviour
             {
                 SpawnObject(prefab.key, prefab.spawnPoint, prefab.spawnNoise); 
                 SetNextSpawnInterval(prefab.key, prefab.minSpawnInterval, prefab.maxSpawnInterval);
-            }
-        
+            }        
         }
 
     }
+
     void SpawnObject(string key, Transform spawnPoint, float spawnNoise)
     {
-        if (prefabDictionary.TryGetValue(key, out GameObject prefab))
+        if (prefabDictionary.TryGetValue(key, out PrefabEntry prefab))
         {
-            Instantiate(prefab, spawnPoint.transform.position + new Vector3(0, UnityEngine.Random.Range(-spawnNoise, spawnNoise)), Quaternion.identity);
+            Instantiate(prefab.gameObject, spawnPoint.transform.position + new Vector3(0, UnityEngine.Random.Range(-spawnNoise, spawnNoise)), Quaternion.identity);
         }
         else
         {

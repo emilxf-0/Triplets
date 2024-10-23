@@ -13,6 +13,7 @@ public class ParallaxManager : MonoBehaviour
 
     public GameObject parallaxLayerPrefab;
     [SerializeField] private List<Parallax> parallax;
+    [SerializeField] private bool isTutorial;
     [SerializeField] GameSpeedData gameSpeedData;
     private List<GameObject> parallaxLayers        = new();
     private List<SpriteRenderer> parallaxRenderers = new();
@@ -33,7 +34,12 @@ public class ParallaxManager : MonoBehaviour
     }
 
     void Update()
-    { 
+    {
+        if (isTutorial)
+        {
+            return;
+        } 
+
         for (int i = 0; i < parallaxLayers.Count; i++)
         {
             var bounds = parallaxRenderers[i].bounds;

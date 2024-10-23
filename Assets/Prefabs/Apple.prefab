@@ -76,6 +76,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Apple
       objectReference: {fileID: 0}
+    - target: {fileID: 7460976034941806625, guid: 827e6cdf5cd86e743989a5cb3dea02ec, type: 3}
+      propertyPath: m_TagString
+      value: Apple
+      objectReference: {fileID: 0}
     - target: {fileID: 8626810384428165588, guid: 827e6cdf5cd86e743989a5cb3dea02ec, type: 3}
       propertyPath: maxHealth
       value: 3

@@ -7,14 +7,34 @@ public class HealthComponent : MonoBehaviour
     private float currentHealth;
     private float updatedHealth;
 
+    void OnEnable()
+    {
+        EventManager.OnStartGame += SetHealthToMax;
+    }
+
+    void OnDisable()
+    {
+        EventManager.OnStartGame -= SetHealthToMax;
+    }
+
     public float CurrentHealth()
     {
         return currentHealth;
     }
 
-    void Awake()
+    public float MaxHealth()
+    {
+        return maxHealth;
+    }
+
+    private void SetHealthToMax()
     {
         currentHealth = maxHealth;
+    }
+
+    void Awake()
+    {
+        SetHealthToMax();
     }
 
     public void GainLife(float health)

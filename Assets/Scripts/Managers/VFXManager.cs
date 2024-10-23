@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using UnityEngine.UI;
-using UnityEditor.Tilemaps;
 using TMPro;
 
 public class VFXManager : MonoBehaviour
@@ -43,9 +39,9 @@ public class VFXManager : MonoBehaviour
 
         startScore = 0;
 
+
         DOTween.To(() => startScore, x => startScore = x, mostRecentScore, 1f).SetId(fx)
-        .OnUpdate(() => UpdateScore(text))
-        .OnComplete(() => UpdateScore(text));
+        .OnUpdate(() => UpdateScore(text));
 
         fx.transform.DOMoveY(transform.position.y + 2, 1f).SetId(fx).OnComplete(() => 
         {

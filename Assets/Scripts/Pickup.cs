@@ -22,7 +22,6 @@ public class Pickup : MonoBehaviour
         spriteRenderer.sprite = pickupType.sprites[spriteNumber];
     }
 
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         //Has to be "1" because Takedamage() triggers after OnTriggerEnter
