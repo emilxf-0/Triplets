@@ -3,6 +3,7 @@ using UnityEngine;
 public class MovementComponent : MonoBehaviour
 {
     [SerializeField] private GameSpeedData gameSpeedData;
+    [SerializeField] private float speedModifier = 0;
     private Vector2 bounds;
     
     void Start()
@@ -12,7 +13,7 @@ public class MovementComponent : MonoBehaviour
 
     void Update()
     {
-        transform.position += new Vector3(-gameSpeedData.speed * Time.deltaTime, 0, 0);
+        transform.position += new Vector3((-gameSpeedData.speed - speedModifier) * Time.deltaTime, 0, 0);
 
         if (transform.position.x < bounds.x)
         {

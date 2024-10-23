@@ -33,12 +33,16 @@ public class VFXManager : MonoBehaviour
 
     public void CreateFlyingNumberVFX(GameObject gameObject, Vector3 position)
     {
+        if (mostRecentScore == 0)
+        {
+            return;
+        }
+
         var fx = Instantiate(gameObject, position, Quaternion.identity);
         var text = fx.GetComponentInChildren<TMP_Text>();
         text.text = mostRecentScore.ToString();
 
         startScore = 0;
-
 
         DOTween.To(() => startScore, x => startScore = x, mostRecentScore, 1f).SetId(fx)
         .OnUpdate(() => UpdateScore(text));
@@ -48,6 +52,8 @@ public class VFXManager : MonoBehaviour
             DOTween.Kill(fx);
             Destroy(fx);   
         });
+        
+        mostRecentScore = 0;
     }
 
     void Start()

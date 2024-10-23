@@ -21,12 +21,15 @@ public class WaveManager : MonoBehaviour
     private Dictionary<string, PrefabEntry> prefabDictionary = new();
     private Dictionary<string, float> nextSpawnTimes = new();
     private float gameSpeed;
-    
+    private float spawnSpeed;
+    private float maxSpawnSpeed = 1.5f;
+
     void OnEnable()
     {
         EventManager.OnStartTutorial += OnStartTutorial;
         EventManager.OnSpawnTutorialItem += SpawnTutorialObject;
         EventManager.OnStartGame += EndTutorial;
+        EventManager.OnSetGameSpeed += UpdateSpawnSpeed;
     }
 
     void OnDisable()
@@ -34,6 +37,7 @@ public class WaveManager : MonoBehaviour
         EventManager.OnStartTutorial -= OnStartTutorial;
         EventManager.OnSpawnTutorialItem -= SpawnTutorialObject;
         EventManager.OnStartGame -= EndTutorial;
+        EventManager.OnSetGameSpeed -= UpdateSpawnSpeed;
     }
 
     void OnStartTutorial()
@@ -49,6 +53,16 @@ public class WaveManager : MonoBehaviour
     void SpawnTutorialObject(string key)
     {
         SpawnObject(key, prefabDictionary[key].spawnPoint, 0);
+    }
+
+    void UpdateSpawnSpeed(float gameSpeed)
+    {
+        spawnSpeed += gameSpeed / 10;
+
+        if (spawnSpeed > maxSpawnSpeed)
+        {
+            spawnSpeed = maxSpawnSpeed;
+        }
     }
 
     void Start()
@@ -92,6 +106,6 @@ public class WaveManager : MonoBehaviour
 
     void SetNextSpawnInterval(string key, float minSpawnInterval, float maxSpawnInterval)
     {
-        nextSpawnTimes[key] = Time.time + UnityEngine.Random.Range(minSpawnInterval, maxSpawnInterval);
+        nextSpawnTimes[key] = Time.time + (UnityEngine.Random.Range(minSpawnInterval, maxSpawnInterval) - spawnSpeed);
     }
 }

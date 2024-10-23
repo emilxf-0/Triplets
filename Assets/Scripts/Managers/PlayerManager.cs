@@ -53,6 +53,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (playerTrail.Count >= maxAvatars)
         {
+            EventManager.AddScore(100);
             return;
         } 
         
