@@ -30,13 +30,13 @@ public class GameHandler : MonoBehaviour
     private void OnEnable()
     {
         EventManager.OnStartGame += StartGame;
-        //EventManager.OnGameOver += GameOver;
+        EventManager.OnGameOver += GameOver;
     }
 
     private void OnDisable()
     {
         EventManager.OnStartGame -= StartGame;
-//        EventManager.OnGameOver -= GameOver;
+        EventManager.OnGameOver -= GameOver;
     }
 
     void Start()
@@ -60,32 +60,23 @@ public class GameHandler : MonoBehaviour
     public void StartGame()
     {
         Time.timeScale = 1;
-        elementsDictionary[UIType.MainMenu].SetActive(false);
-        elementsDictionary[UIType.HUD].SetActive(true);
-        elementsDictionary[UIType.Tutorial].SetActive(false);
-        elementsDictionary[UIType.GameOver].SetActive(false);
+        ActivateUI(UIType.HUD); 
     }
 
     private void ShowMenu()
     {
         Time.timeScale = 0;
-        elementsDictionary[UIType.MainMenu].SetActive(true);
-        elementsDictionary[UIType.HUD].SetActive(false);
-        elementsDictionary[UIType.Tutorial].SetActive(false);
-        elementsDictionary[UIType.GameOver].SetActive(false);
+        ActivateUI(UIType.MainMenu);
     }
 
     public void RunTutorial()
     {
         Time.timeScale = 1;
         EventManager.StartTutorial();
-        elementsDictionary[UIType.MainMenu].SetActive(false);
-        elementsDictionary[UIType.HUD].SetActive(true);
-        elementsDictionary[UIType.Tutorial].SetActive(true);
-        elementsDictionary[UIType.GameOver].SetActive(false);
+        ActivateUI(UIType.HUD, UIType.Tutorial);
     }
 
-    void OnGameOver()
+    void GameOver()
     {
         Time.timeScale = 0;
     }
@@ -94,6 +85,36 @@ public class GameHandler : MonoBehaviour
     {
         EventManager.RestartGame();
         SceneManager.LoadScene("Game");
+    }
+
+    void ActivateUI(UIType key)
+    {
+        foreach (KeyValuePair<UIType, GameObject> type in elementsDictionary)
+        {
+            if (type.Key == key)
+            {
+                elementsDictionary[type.Key].SetActive(true);
+            }
+            else    
+            {
+                elementsDictionary[type.Key].SetActive(false);
+            }
+        }
+    }
+
+    void ActivateUI(UIType key, UIType key2)
+    {
+        foreach (KeyValuePair<UIType, GameObject> type in elementsDictionary)
+        {
+            if (type.Key == key || type.Key == key2)
+            {
+                elementsDictionary[type.Key].SetActive(true);
+            }
+            else
+            {
+                elementsDictionary[type.Key].SetActive(false);
+            }
+        }
     }
 
 }
