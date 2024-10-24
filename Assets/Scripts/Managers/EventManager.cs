@@ -26,6 +26,7 @@ public static class EventManager
     public static event Action<string>                  OnSpawnTutorialItem;
     public static event Action                          OnStartTutorial;
     public static event Action<GameObject, string>      OnGotDestroyedOffScreen;
+    public static event Action                          OnResetHealth;
 
     public static void PickupDestroyed()                                        => OnPickUpDestroyed?.Invoke();
     public static void Spawn(GameObject gameObject)                             => OnSpawn?.Invoke(gameObject);
@@ -48,4 +49,5 @@ public static class EventManager
     public static void SpawnTutorialItem(string key)                            => OnSpawnTutorialItem?.Invoke(key);
     public static void StartTutorial()                                          => OnStartTutorial?.Invoke();
     public static void GotDestroyedOffScreen(GameObject gameObject, string key) => OnGotDestroyedOffScreen?.Invoke(gameObject, key);
+    public static void ResetHealth()                                            => OnResetHealth?.Invoke();
 }

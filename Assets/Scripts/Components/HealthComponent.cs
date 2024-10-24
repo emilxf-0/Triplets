@@ -11,12 +11,14 @@ public class HealthComponent : MonoBehaviour
     {
         EventManager.OnStartGame += SetHealthToMax;
         EventManager.OnRestartGame += SetHealthToMax;
+        EventManager.OnResetHealth += SetHealthToMax;
     }
 
     void OnDisable()
     {
         EventManager.OnStartGame -= SetHealthToMax;
         EventManager.OnRestartGame -= SetHealthToMax;
+        EventManager.OnResetHealth -= SetHealthToMax;
     }
 
     public float CurrentHealth()

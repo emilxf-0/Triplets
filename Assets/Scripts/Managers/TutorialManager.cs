@@ -43,6 +43,7 @@ public class TutorialManager : MonoBehaviour
             }
 
             SpawnNewObject(key);
+            EventManager.ResetHealth();
 
         }
     }

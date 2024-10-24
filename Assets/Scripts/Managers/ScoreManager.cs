@@ -61,7 +61,8 @@ public class ScoreManager : MonoBehaviour
 
     void SetHiscore()
     {
-        try
+        
+        if (File.Exists(filePath))
         {
             var json = File.ReadAllText(filePath);
             var hiScoreData = JsonUtility.FromJson<HiScore>(json);
@@ -69,13 +70,11 @@ public class ScoreManager : MonoBehaviour
             currentHiScore = hiScoreData.hiScore;
             EventManager.SetHiScore(hiScoreData.hiScore);
         }
-        catch (Exception)
+        else
         {
             SaveHiScoreData(0);
-            var json = File.ReadAllText(filePath);
-            var hiScoreData = JsonUtility.FromJson<HiScore>(json);
-            currentHiScore = hiScoreData.hiScore;
-            EventManager.SetHiScore(hiScoreData.hiScore);
+            currentHiScore = 0;
+            EventManager.SetHiScore(0);
         }
     }
 }
