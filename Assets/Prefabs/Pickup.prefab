@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -6370795202431163931}
   - component: {fileID: -6118262992980073234}
   - component: {fileID: 8626810384428165588}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Pickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameSpeedData: {fileID: 11400000, guid: 59ed03bef58110d49aee1a2ad1087737, type: 2}
+  speedModifier: 0
 --- !u!114 &8626810384428165588
 MonoBehaviour:
   m_ObjectHideFlags: 0
