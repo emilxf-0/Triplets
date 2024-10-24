@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -11,32 +12,41 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float spacing                = 4f;
     [SerializeField] private int maxAvatars               = 6;
     private HealthComponent healthComponent;
+    private int startAvatars = 3;
     
     private void OnEnable()
     {
-        EventManager.OnAddAvatar  += OnAddAvatar;
-        EventManager.OnTakeDamage += OnTakeDamage;
-        EventManager.OnGainLife   += OnGainLife;
+        EventManager.OnAddAvatar   += OnAddAvatar;
+        EventManager.OnTakeDamage  += OnTakeDamage;
+        EventManager.OnGainLife    += OnGainLife;
+        EventManager.OnRestartGame += Init;
+        EventManager.OnGameOver    += DestroyAvatars;
+    }
+
+    void Init()
+    {
+        for (int i = 0; i < startAvatars; i++)
+        {
+            var offset = new Vector3(spacing * i, 0, 0);
+            playerTrail.Add(Instantiate(playerPrefab, spawnPoint.transform.position - offset, Quaternion.identity));
+        }
+        
+        EventManager.MultiplierChange(numberOfPlayerAvatars);
     }
     
     void Start()
     {   
         healthComponent = GetComponent<HealthComponent>();        
-
-        for (int i = 0; i < numberOfPlayerAvatars; i++)
-        {
-            var offset = new Vector3(spacing * i, 0, 0);
-            playerTrail.Add(Instantiate(playerPrefab, spawnPoint.transform.position - offset, Quaternion.identity));
-        }
-
-        EventManager.MultiplierChange(numberOfPlayerAvatars);
+        Init();
     }
 
     private void OnDisable()
     {
-        EventManager.OnAddAvatar  -= OnAddAvatar;
-        EventManager.OnTakeDamage -= OnTakeDamage;
-        EventManager.OnGainLife   -= OnGainLife;
+        EventManager.OnAddAvatar   -= OnAddAvatar;
+        EventManager.OnTakeDamage  -= OnTakeDamage;
+        EventManager.OnGainLife    -= OnGainLife;
+        EventManager.OnRestartGame -= Init;
+        EventManager.OnGameOver    -= DestroyAvatars;
     }
 
     void OnGainLife(GameObject gameObject, int healAmount)
@@ -63,5 +73,15 @@ public class PlayerManager : MonoBehaviour
         numberOfPlayerAvatars++;
 
         EventManager.MultiplierChange(numberOfPlayerAvatars);
+    }
+
+    void DestroyAvatars()
+    {
+        foreach (var avatar in playerTrail)
+        {
+            Destroy(avatar);
+        }
+        
+        playerTrail.Clear();
     }
 }

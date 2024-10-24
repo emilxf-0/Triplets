@@ -21,6 +21,7 @@ public class HUD : MonoBehaviour
         EventManager.OnSetHiScore       += OnSetHiScore;
         EventManager.OnUpdateHealth     += OnUpdateHealth;
         EventManager.OnMultiplierChange += UpdateMultiplier;
+        EventManager.OnRestartGame      += Init;
     }
 
     void OnDisable()
@@ -29,6 +30,7 @@ public class HUD : MonoBehaviour
         EventManager.OnSetHiScore       -= OnSetHiScore;
         EventManager.OnUpdateHealth     -= OnUpdateHealth;
         EventManager.OnMultiplierChange -= UpdateMultiplier;
+        EventManager.OnRestartGame      -= Init;
     }
     
     void Awake()
@@ -38,11 +40,17 @@ public class HUD : MonoBehaviour
         multiplierTransform = multiplierText.GetComponent<RectTransform>();
     }
 
-    void Start()
+    void Init()
     {
+        score = 0;
         UpdateScore();
         UpdateHiScore(score);
         UpdateMultiplier(3);
+    }
+
+    void Start()
+    {
+        Init();
     }
 
     void OnAddScore(int score)

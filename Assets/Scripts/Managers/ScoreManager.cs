@@ -13,7 +13,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] ScoreData scoreData;
 
     private int currentHiScore = 0;
-    private int applesPicked   = 0;
+    private int applesPicked = 0;
     private string filePath;
 
     void OnEnable()
@@ -29,7 +29,7 @@ public class ScoreManager : MonoBehaviour
     void Start()
     {
         filePath = Path.Combine(Application.persistentDataPath, "hiScore.json");
-        
+
         //Fix race condition
         Invoke(nameof(SetHiscore), 0.1f);
     }
@@ -55,15 +55,27 @@ public class ScoreManager : MonoBehaviour
     void SaveHiScoreData(int score)
     {
         var hiScoreData = new HiScore { hiScore = score };
-        var json        = JsonUtility.ToJson(hiScoreData);
+        var json = JsonUtility.ToJson(hiScoreData);
         File.WriteAllText(filePath, json);
     }
 
     void SetHiscore()
     {
-        var json           = File.ReadAllText(filePath);
-        var hiScoreData    = JsonUtility.FromJson<HiScore>(json);
-        currentHiScore     = hiScoreData.hiScore;
-        EventManager.SetHiScore(hiScoreData.hiScore);
+        try
+        {
+            var json = File.ReadAllText(filePath);
+            var hiScoreData = JsonUtility.FromJson<HiScore>(json);
+
+            currentHiScore = hiScoreData.hiScore;
+            EventManager.SetHiScore(hiScoreData.hiScore);
+        }
+        catch (Exception)
+        {
+            SaveHiScoreData(0);
+            var json = File.ReadAllText(filePath);
+            var hiScoreData = JsonUtility.FromJson<HiScore>(json);
+            currentHiScore = hiScoreData.hiScore;
+            EventManager.SetHiScore(hiScoreData.hiScore);
+        }
     }
 }

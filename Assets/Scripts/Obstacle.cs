@@ -7,6 +7,17 @@ public class Obstacle : MonoBehaviour
     
     private Vector3 bounds;
 
+    void OnEnable()
+    {
+        EventManager.OnRestartGame += DestroyObstacle;
+    }
+
+
+    void OnDisable()
+    {
+        EventManager.OnRestartGame -= DestroyObstacle;
+    }
+
     private void Start()
     {
         if (spriteRenderer == null)
@@ -22,5 +33,10 @@ public class Obstacle : MonoBehaviour
             EventManager.TakeDamage(other.gameObject, damage);   
         }
     }
-    
+
+    void DestroyObstacle()
+    {
+        Destroy(gameObject);
+    }
+
 }

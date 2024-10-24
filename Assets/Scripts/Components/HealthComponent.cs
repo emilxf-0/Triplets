@@ -10,11 +10,13 @@ public class HealthComponent : MonoBehaviour
     void OnEnable()
     {
         EventManager.OnStartGame += SetHealthToMax;
+        EventManager.OnRestartGame += SetHealthToMax;
     }
 
     void OnDisable()
     {
         EventManager.OnStartGame -= SetHealthToMax;
+        EventManager.OnRestartGame -= SetHealthToMax;
     }
 
     public float CurrentHealth()
@@ -30,6 +32,11 @@ public class HealthComponent : MonoBehaviour
     private void SetHealthToMax()
     {
         currentHealth = maxHealth;
+
+        if (isPlayer)
+        {
+            UpdateHealth();
+        }
     }
 
     void Awake()
@@ -67,6 +74,7 @@ public class HealthComponent : MonoBehaviour
             if (isPlayer)
             {
                 EventManager.GameOver();
+                return;
             }
 
             Destroy(gameObject);

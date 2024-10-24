@@ -9,6 +9,16 @@ public class Pickup : MonoBehaviour
     private int spriteNumber = 0;
     private Vector3 bounds;
 
+    void OnEnable()
+    {
+        EventManager.OnRestartGame += DestroyPickup;
+    }
+
+    void OnDisable()
+    {
+        EventManager.OnRestartGame -= DestroyPickup;
+    }
+
     private void Start()
     {
         if (spriteRenderer == null)
@@ -43,5 +53,10 @@ public class Pickup : MonoBehaviour
 
         spriteNumber++;
         spriteRenderer.sprite = pickupType.sprites[spriteNumber];
+    }
+
+    void DestroyPickup()
+    {
+        Destroy(gameObject);
     }
 }
