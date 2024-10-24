@@ -1,0 +1,27 @@
+.header {
+}
+
+.button {
+    -unity-font-definition: initial;
+    -unity-font: url("project://database/Assets/Fonts/DroidSans-Bold.ttf?fileID=12800000&guid=1e129baffb3ab444eb9f9c2b45fa3a4f&type=3#DroidSans-Bold");
+    font-size: 42px;
+    -unity-font-style: normal;
+    height: 60px;
+    width: 200px;
+    align-self: center;
+    background-color: rgba(132, 35, 35, 0);
+    border-top-width: 4px;
+    border-right-width: 4px;
+    border-bottom-width: 4px;
+    border-left-width: 4px;
+}
+
+.button:inactive {
+    transition-duration: 1s;
+    transition-timing-function: ease-out-elastic;
+}
+
+.button:active {
+    transition-duration: 0.1s;
+    scale: 1.1 1.1;
+}

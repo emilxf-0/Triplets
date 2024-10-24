@@ -6,6 +6,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Button = UnityEngine.UIElements.Button;
 
 public class GameHandler : MonoBehaviour
 {
@@ -19,6 +21,8 @@ public class GameHandler : MonoBehaviour
     [SerializeField] private List<UIElement> UIElements = new();
     private Dictionary<UIType, GameObject> elementsDictionary = new();
 
+    private Button startButton;
+
     public enum UIType
     {
         MainMenu,
@@ -31,16 +35,7 @@ public class GameHandler : MonoBehaviour
     {
         EventManager.OnStartGame += StartGame;
         EventManager.OnGameOver += GameOver;
-    }
-
-    private void OnDisable()
-    {
-        EventManager.OnStartGame -= StartGame;
-        EventManager.OnGameOver -= GameOver;
-    }
-
-    void Start()
-    {
+        
         foreach (UIElement element in UIElements)
         {
             if (!elementsDictionary.ContainsKey(element.elementType))
@@ -53,8 +48,20 @@ public class GameHandler : MonoBehaviour
             }
         }
 
+        var root = elementsDictionary[UIType.MainMenu].GetComponent<UIDocument>().rootVisualElement;
+
+        startButton = root.Q<Button>("start-button");
+
+        startButton.clicked += RunTutorial;
+
         ShowMenu();
 
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnStartGame -= StartGame;
+        EventManager.OnGameOver -= GameOver;
     }
 
     public void StartGame()
@@ -84,7 +91,7 @@ public class GameHandler : MonoBehaviour
     public void RestartGame()
     {
         EventManager.RestartGame();
-        SceneManager.LoadScene("Game");
+        StartGame();
     }
 
     void ActivateUI(UIType key)

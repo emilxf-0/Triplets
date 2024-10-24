@@ -20,7 +20,7 @@ public class HUD : MonoBehaviour
         EventManager.OnAddScore         += OnAddScore;
         EventManager.OnSetHiScore       += OnSetHiScore;
         EventManager.OnUpdateHealth     += OnUpdateHealth;
-        EventManager.OnMultiplierChange += OnUpdateMultiplier;
+        EventManager.OnMultiplierChange += UpdateMultiplier;
     }
 
     void OnDisable()
@@ -28,7 +28,21 @@ public class HUD : MonoBehaviour
         EventManager.OnAddScore         -= OnAddScore;
         EventManager.OnSetHiScore       -= OnSetHiScore;
         EventManager.OnUpdateHealth     -= OnUpdateHealth;
-        EventManager.OnMultiplierChange -= OnUpdateMultiplier;
+        EventManager.OnMultiplierChange -= UpdateMultiplier;
+    }
+    
+    void Awake()
+    {
+        sb = new StringBuilder();
+        
+        multiplierTransform = multiplierText.GetComponent<RectTransform>();
+    }
+
+    void Start()
+    {
+        UpdateScore();
+        UpdateHiScore(score);
+        UpdateMultiplier(3);
     }
 
     void OnAddScore(int score)
@@ -42,9 +56,11 @@ public class HUD : MonoBehaviour
         .OnComplete(() => UpdateScore());
     }
 
-    void OnUpdateMultiplier(int multiplier)
+    void UpdateMultiplier(int multiplier)
     {
-        multiplierText.text = $"X{multiplier.ToString()}";
+        sb.Clear();
+        sb.Append("X" + multiplier);
+        multiplierText.text = sb.ToString();
 
         DOTween.Kill("MultiplierTween");
 
@@ -56,19 +72,6 @@ public class HUD : MonoBehaviour
         sb.Clear();
         sb.Append("Score: ").AppendFormat("{0:D6}", score);
         scoreText.text = sb.ToString();
-    }
-
-    void Awake()
-    {
-        sb = new StringBuilder();
-        
-        multiplierTransform = multiplierText.GetComponent<RectTransform>();
-    }
-
-    void Start()
-    {
-        UpdateScore();
-        UpdateHiScore(score);
     }
 
     void OnSetHiScore(int hiScore)
