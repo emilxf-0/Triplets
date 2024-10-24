@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=6624ba9acb219554fb366e54d6ea2c3b&amp;type=3#MainMenuStyle" />
+    <ui:VisualElement name="Container" style="flex-grow: 1; -unity-font-definition: initial; -unity-font: url(&quot;project://database/Assets/Fonts/DroidSans-Bold.ttf?fileID=12800000&amp;guid=1e129baffb3ab444eb9f9c2b45fa3a4f&amp;type=3#DroidSans-Bold&quot;); -unity-text-align: upper-center; justify-content: flex-start; background-image: url(&quot;project://database/Assets/Art/PettsonCore_BG/Layer_0.png?fileID=2800000&amp;guid=bb70ea48da8b191408d33ce34d01ce76&amp;type=3#Layer_0&quot;);">
+        <ui:Label tabindex="-1" text="Hedgehog Fakkaz" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Header" class="header" style="-unity-font: url(&quot;project://database/Assets/Fonts/DroidSans-Bold.ttf?fileID=12800000&amp;guid=1e129baffb3ab444eb9f9c2b45fa3a4f&amp;type=3#DroidSans-Bold&quot;); font-size: 112px; -unity-font-definition: initial; -unity-text-align: upper-center; justify-content: flex-start; margin-top: 257px; height: 336px;" />
+        <ui:VisualElement style="flex-grow: 1; flex-basis: 20px;">
+            <ui:Button text="Play" parse-escape-sequences="true" display-tooltip-when-elided="true" name="start-button" class="button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
