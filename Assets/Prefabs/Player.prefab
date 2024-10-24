@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 1898563509023305053}
   - component: {fileID: 4982297444362634145}
   - component: {fileID: 326370141401326199}
+  - component: {fileID: -1285030626556416595}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -60,7 +61,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: dae3d38c81058f547901ef26065b43f6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -276,3 +277,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5793534, y: 0.04549104}
   m_EdgeRadius: 0
+--- !u!114 &-1285030626556416595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4791477036918130654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57f5aee2d2be0134380ff2e7be286abe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

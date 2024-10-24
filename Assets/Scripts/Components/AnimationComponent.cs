@@ -1,9 +1,12 @@
+using System.Collections;
 using UnityEngine;
 
 public class AnimationComponent : MonoBehaviour
 {
     private Animator animator;
     private JumpComponent movementComponent;
+    private SpriteRenderer spriteRenderer;
+
 
     void OnEnable()
     {
@@ -23,10 +26,12 @@ public class AnimationComponent : MonoBehaviour
         }
     }
 
+
     void Start()
     {
         animator = GetComponent<Animator>();
         movementComponent = GetComponent<JumpComponent>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
