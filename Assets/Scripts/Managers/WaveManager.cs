@@ -17,7 +17,7 @@ public class WaveManager : MonoBehaviour
 
     [SerializeField] private List<PrefabEntry> prefabEntries;
     [SerializeField] private bool isTutorial;
-    
+
     private Dictionary<string, PrefabEntry> prefabDictionary = new();
     private Dictionary<string, float> nextSpawnTimes = new();
     private float gameSpeed;
@@ -85,11 +85,26 @@ public class WaveManager : MonoBehaviour
         {
             if (Time.time >= nextSpawnTimes[prefab.key])
             {
-                SpawnObject(prefab.key, prefab.spawnPoint, prefab.spawnNoise); 
-                SetNextSpawnInterval(prefab.key, prefab.minSpawnInterval, prefab.maxSpawnInterval);
-            }        
+                
+                if (CheckForOverlap(prefab).Length == 0)
+                {
+                    SpawnObject(prefab.key, prefab.spawnPoint, prefab.spawnNoise);
+                    SetNextSpawnInterval(prefab.key, prefab.minSpawnInterval, prefab.maxSpawnInterval);
+                }
+                else
+                {
+                    SetNextSpawnInterval(prefab.key, 1, 3);
+                }
+
+            }
         }
 
+    }
+
+    Collider[] CheckForOverlap(PrefabEntry prefab)
+    {
+        Collider[] physicsCheck = Physics.OverlapSphere(prefab.spawnPoint.position, 1f);
+        return physicsCheck;
     }
 
     void SpawnObject(string key, Transform spawnPoint, float spawnNoise)
