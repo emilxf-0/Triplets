@@ -12,18 +12,13 @@ public class ShakeComponent : MonoBehaviour
 
     void OnEnable()
     {
-//        if (shakeOnDamage)
-        {
-            EventManager.OnTakeDamage += OnTakeDamage;
-        }
+        EventManager.OnTakeDamage += OnTakeDamage;
     }
 
     void OnDisable()
     {
-        //if (shakeOnDamage)
-        {
-            EventManager.OnTakeDamage -= OnTakeDamage;
-        }
+        EventManager.OnTakeDamage -= OnTakeDamage;
+        DOTween.Kill(this);
     }
 
     void Start()
@@ -38,10 +33,11 @@ public class ShakeComponent : MonoBehaviour
 
     void Shake()
     {
+        DOTween.Complete(this);
+
         transform.DOShakePosition(shakeTime, shakeStrength).SetId(this).OnComplete(() => 
         {
             transform.position = startPos;
-            DOTween.Kill(this);
         });       
     }
 
