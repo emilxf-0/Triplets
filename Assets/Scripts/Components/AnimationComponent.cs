@@ -3,19 +3,21 @@ using UnityEngine;
 
 public class AnimationComponent : MonoBehaviour
 {
-    private Animator animator;
-    private JumpComponent movementComponent;
+    [SerializeField] private Animator animator;
+    private JumpComponent jumpComponent;
     private SpriteRenderer spriteRenderer;
 
 
     void OnEnable()
     {
         EventManager.OnTakeDamage += OnTakeDamage;
+        EventManager.OnPlayerGrounded += StopJumpAnimation;
     }
 
     void OnDisable()
     {
         EventManager.OnTakeDamage -= OnTakeDamage;
+        EventManager.OnPlayerGrounded -= StopJumpAnimation;
     }
 
     void OnTakeDamage(GameObject gameObject, int damage)
@@ -30,20 +32,21 @@ public class AnimationComponent : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        movementComponent = GetComponent<JumpComponent>();
+        jumpComponent = GetComponent<JumpComponent>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    void Update()
+    public void StopJumpAnimation(GameObject gameObject)
     {
-        if (movementComponent.IsGrounded())
+        if (gameObject == this.gameObject)
         {
             animator.SetBool("isJumping", false);
         }
-        else
-        {
-            animator.SetBool("isJumping", true);
-        }
+    }
+
+    public void StartJumpAnimation()
+    {
+        animator.SetBool("isJumping", true);
     }
 
     void EndHurtAnimation()

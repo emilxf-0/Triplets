@@ -9,6 +9,7 @@ public class JumpComponent : MonoBehaviour
 
     public bool isGrounded = true;
     private Rigidbody2D rb = null;
+    private bool isJumping = false;
 
     void Awake()
     {
@@ -21,6 +22,7 @@ public class JumpComponent : MonoBehaviour
         {
             rb.velocity = Vector2.up * jumpForce;
             isGrounded = false;
+            isJumping = true;
             EventManager.PlayerJump();
         }
     }
@@ -47,11 +49,21 @@ public class JumpComponent : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("ground"))
+        if (collision.gameObject.CompareTag("ground") && isJumping)
         {
-            isGrounded = true;
+            EventManager.PlayerGrounded(this.gameObject);
+            isJumping = false;
+            //Dirty, dirty fix so the in air animation doesn't hang
+            Invoke(nameof(DelayGroundCheck), 0.001f);
         }
     }
+
+    void DelayGroundCheck()
+    {
+        isGrounded = true;        
+    }
+
+
     public bool IsGrounded()
     {
         return isGrounded;
